@@ -1,0 +1,21 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.notifications-count {
+  position: absolute;
+  top: -4px;
+  right: 5px;
+  border-radius: 50%;
+  font-size: 80%;
+  background-color: #3779f3;
+  color: #fff;
+  padding: 1px;
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.notifications-count span {
+  padding: 3px;
+}

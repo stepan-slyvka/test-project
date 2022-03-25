@@ -1,0 +1,21 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.shopping-cart-count {
+  position: absolute;
+  top: -4px;
+  right: 5px;
+  border-radius: 50%;
+  font-size: 80%;
+  background-color: #f65976;
+  color: #fff;
+  padding: 1px;
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.shopping-cart-count span {
+  padding: 3px;
+}

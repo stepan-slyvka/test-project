@@ -1,0 +1,79 @@
+.person-info {
+  display: flex;
+  margin-top: 50px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 120px;
+  margin-right: 50px;
+  margin-left: inherit;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.image image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.additional-contact-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.useful {
+  width: 100%;
+  display: flex;
+  flex-shrink: 0;
+  align-items: baseline;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+.heading {
+  font-size: 14px;
+  font-weight: 900;
+  color: rgb(50, 51, 50);
+  line-height: 1.5;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 15px;
+  margin-left: inherit;
+  text-align: left;
+  min-width: 80px;
+  position: relative;
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(151, 151, 151);
+  line-height: 1.5;
+  margin: 0px;
+  text-align: left;
+}
+
+h1 {
+  font-size: 11pt;
+}
