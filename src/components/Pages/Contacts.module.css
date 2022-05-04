@@ -8,12 +8,12 @@
 
 .wrapper {
   display: flex;
-  padding: 50px 35px;
+  padding: 55px 35px;
   background-color: #f2f3f7;
   height: 970px;
 }
 
-input {
+.search-input {
   width: 100%;
   font-size: 14px;
   font-weight: 400;
@@ -35,6 +35,10 @@ input {
   flex-direction: row;
   align-items: center;
   align-content: center;
+}
+
+.search input:focus {
+  outline: none;
 }
 
 .search svg:hover {
@@ -75,8 +79,9 @@ input {
   justify-content: flex-start;
   align-content: center;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
   cursor: pointer;
+  height: 66px;
 }
 
 .cross {
@@ -91,10 +96,6 @@ input {
 
 .cross:hover {
   color: rgb(68, 130, 255);
-}
-
-.contacts-list-wrapper {
-  border-top: 1px solid #eee;
 }
 
 .image-wrapper {

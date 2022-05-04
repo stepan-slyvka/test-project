@@ -112,9 +112,18 @@ const Contacts = (props) => {
   const [contactsList, setContactsList] = useState(CONTACTS);
   const [selectedContact, setSelectedContact] = useState(CONTACTS[0]);
   const [searchName, setSearchName] = useState("");
+  const [value, setValue] = useState("");
+
+  const searchChangeHandler = (event) => {
+    setSearchName(event.target.value);
+  };
 
   const contactClickHandler = (contactData) => {
     setSelectedContact(contactData);
+  };
+
+  const inputValue = (event) => {
+    setValue(event.target.value);
   };
 
   return (
@@ -131,10 +140,9 @@ const Contacts = (props) => {
             <div className={classes["content-wrapper"]}>
               <span className={classes.search}>
                 <input
+                  className={classes["search-input"]}
                   placeholder="Search Contacts"
-                  onChange={(event) => {
-                    setSearchName(event.target.value);
-                  }}
+                  onChange={searchChangeHandler}
                 />
                 <span>
                   <FontAwesomeIcon
@@ -153,11 +161,13 @@ const Contacts = (props) => {
                     ) {
                       return val;
                     }
+                    return null;
                   })
-                  .map((contact) => (
+                  .map((contact, index) => (
                     <div
                       className={classes["contacts-list"]}
                       onClick={() => contactClickHandler(contact)}
+                      key={index}
                     >
                       <div className={classes["image-wrapper"]}>
                         <img
