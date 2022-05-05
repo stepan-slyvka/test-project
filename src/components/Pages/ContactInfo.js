@@ -10,35 +10,10 @@ import { useFormik } from "formik";
 
 const ContactInfo = (props) => {
   const [formIsShown, setFormIsShown] = useState(false);
-  // const [enteredName, setEnteredName] = useState("");
-  // const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
-  // const [enteredSurName, setEnteredSurName] = useState("");
 
   const showEl = () => {
     setFormIsShown(true);
   };
-
-  // const inputName = (event) => {
-  //   setEnteredName(event.target.value);
-  // };
-
-  // const inputSurName = (event) => {
-  //   setEnteredSurName(event.target.value);
-  // };
-
-  // const preventDefaultHandler = (event) => {
-  //   event.preventDefault();
-
-  //   if (enteredName.trim() === "") {
-  //     setEnteredNameIsValid(false);
-  //     return;
-  //   }
-
-  //   setEnteredNameIsValid(true);
-
-  //   console.log(enteredName);
-  //   console.log(enteredSurName);
-  // };
 
   const validate = (values) => {
     const errors = {};
