@@ -74,8 +74,18 @@ const ContactInfo = (props) => {
       notes: "",
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    // // onSubmit: (val) => {
+    // //   props.setContactsList(val);
+    // // },
+    // onSubmit: props.handleAdd,
+    onSubmit: (val) => {
+      props.setContactsList(
+        props.contactsList.concat({
+          firstName: val.firstName,
+          lastName: val.lastName,
+        })
+      );
+      console.log(val);
     },
   });
 
@@ -89,7 +99,7 @@ const ContactInfo = (props) => {
                 <FontAwesomeIcon icon={faPencil} />
               </button>
             ) : (
-              <button type="submit" className={classes.check}>
+              <button className={classes.check}>
                 <FontAwesomeIcon icon={faCheck} />
               </button>
             )}

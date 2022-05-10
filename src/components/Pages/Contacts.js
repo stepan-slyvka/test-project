@@ -112,7 +112,6 @@ const Contacts = (props) => {
   const [contactsList, setContactsList] = useState(CONTACTS);
   const [selectedContact, setSelectedContact] = useState(CONTACTS[0]);
   const [searchName, setSearchName] = useState("");
-  const [value, setValue] = useState("");
 
   const searchChangeHandler = (event) => {
     setSearchName(event.target.value);
@@ -122,9 +121,11 @@ const Contacts = (props) => {
     setSelectedContact(contactData);
   };
 
-  const inputValue = (event) => {
-    setValue(event.target.value);
-  };
+  // const handleAdd = () => {
+  //   const newList = contactsList.concat({});
+
+  //   setContactsList(newList);
+  // };
 
   return (
     <div
@@ -141,7 +142,7 @@ const Contacts = (props) => {
               <span className={classes.search}>
                 <input
                   className={classes["search-input"]}
-                  placeholder="Search Contacts"
+                  placeholder="Search Contacts..."
                   onChange={searchChangeHandler}
                 />
                 <span>
@@ -195,7 +196,12 @@ const Contacts = (props) => {
             </div>
           </main>
         </section>
-        <ContactInfo contact={selectedContact} />
+        <ContactInfo
+          contact={selectedContact}
+          setContactsList={setContactsList}
+          contactsList={contactsList}
+          // handleAdd={handleAdd}
+        />
       </div>
       <footer className={classes.footer}>
         Isomorphic @ 2022 Created by RedQ, Inc
