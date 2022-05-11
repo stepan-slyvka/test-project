@@ -121,12 +121,19 @@ const Contacts = (props) => {
     setSelectedContact(contactData);
   };
 
-  // const handleAdd = () => {
-  //   const newList = contactsList.concat({});
+  const handleAdd = (val) => {
+    const newList = contactsList.concat({
+      id: Math.random(),
+      name: val.firstName + " " + val.lastName,
+      mobile: val.mobile,
+      home: val.home,
+      company: val.company,
+      work: val.work,
+      notes: val.notes,
+    });
 
-  //   setContactsList(newList);
-  // };
-
+    setContactsList(newList);
+  };
   return (
     <div
       className={
@@ -198,9 +205,8 @@ const Contacts = (props) => {
         </section>
         <ContactInfo
           contact={selectedContact}
-          setContactsList={setContactsList}
-          contactsList={contactsList}
-          // handleAdd={handleAdd}
+          setSelectedContact={setSelectedContact}
+          handleAdd={handleAdd}
         />
       </div>
       <footer className={classes.footer}>

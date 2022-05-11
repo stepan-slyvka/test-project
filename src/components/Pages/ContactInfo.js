@@ -74,18 +74,10 @@ const ContactInfo = (props) => {
       notes: "",
     },
     validate,
-    // // onSubmit: (val) => {
-    // //   props.setContactsList(val);
-    // // },
-    // onSubmit: props.handleAdd,
     onSubmit: (val) => {
-      props.setContactsList(
-        props.contactsList.concat({
-          firstName: val.firstName,
-          lastName: val.lastName,
-        })
-      );
-      console.log(val);
+      props.handleAdd(val);
+      setFormIsShown(false);
+      props.setSelectedContact(val);
     },
   });
 
