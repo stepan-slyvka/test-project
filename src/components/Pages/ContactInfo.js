@@ -95,7 +95,10 @@ const ContactInfo = (props) => {
                 <FontAwesomeIcon icon={faCheck} />
               </button>
             )}
-            <button className={classes.close}>
+            <button
+              className={classes.close}
+              onClick={() => props.handleDelete(props.contact.id)}
+            >
               <FontAwesomeIcon icon={faTimes} />
             </button>
             <button className={classes["add-new-user-btn"]} onClick={showEl}>

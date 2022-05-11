@@ -134,6 +134,12 @@ const Contacts = (props) => {
 
     setContactsList(newList);
   };
+
+  const handleDelete = (id) => {
+    const updatedList = contactsList.filter((item) => item.id !== id);
+
+    setContactsList(updatedList);
+  };
   return (
     <div
       className={
@@ -175,7 +181,7 @@ const Contacts = (props) => {
                     <div
                       className={classes["contacts-list"]}
                       onClick={() => contactClickHandler(contact)}
-                      key={index}
+                      key={contact.id}
                     >
                       <div className={classes["image-wrapper"]}>
                         <img
@@ -189,6 +195,8 @@ const Contacts = (props) => {
                         <h3>{contact.name}</h3>
                       </div>
                       <button
+                        type="button"
+                        onClick={() => handleDelete(contact.id)}
                         className={
                           props.isShrinkedContacts
                             ? classes["cross-shrinked"]
@@ -207,6 +215,7 @@ const Contacts = (props) => {
           contact={selectedContact}
           setSelectedContact={setSelectedContact}
           handleAdd={handleAdd}
+          handleDelete={handleDelete}
         />
       </div>
       <footer className={classes.footer}>
