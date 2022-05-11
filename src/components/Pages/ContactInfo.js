@@ -79,13 +79,15 @@ const ContactInfo = (props) => {
     // // },
     // onSubmit: props.handleAdd,
     onSubmit: (val) => {
-      props.setContactsList(
-        props.contactsList.concat({
-          firstName: val.firstName,
-          lastName: val.lastName,
-        })
-      );
-      console.log(val);
+    	props.handleAdd(val);
+      // props.setContactsList(
+      //
+      //   props.contactsList.concat({
+      //     firstName: val.firstName,
+      //     lastName: val.lastName,
+      //   })
+      // );
+      // console.log(val);
     },
   });
 

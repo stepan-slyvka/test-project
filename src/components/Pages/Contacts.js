@@ -121,11 +121,22 @@ const Contacts = (props) => {
     setSelectedContact(contactData);
   };
 
-  // const handleAdd = () => {
-  //   const newList = contactsList.concat({});
-
-  //   setContactsList(newList);
-  // };
+  const handleAdd = (val) => {
+  	console.log(val);
+  	
+    const newList = contactsList.concat({
+			id: "c5",
+			name: val.firstName + ' ' + val.lastName,
+			mobile: "779.482.9824",
+			home: "(698) 858-0337 x3273",
+			company: "Moen Group",
+			work: "881.768.7522",
+			notes:
+					"Quibusdam dolorem minima ea enim nostrum eos. Corrupti dolore velit molestiae nostrum error qui. Sit qui maxime sed quisquam rem cupiditate. Iste ex quidem. Ipsam et quia omnis facere blanditiis.",
+		});
+		
+    setContactsList(newList);
+  };
 
   return (
     <div
@@ -198,9 +209,9 @@ const Contacts = (props) => {
         </section>
         <ContactInfo
           contact={selectedContact}
-          setContactsList={setContactsList}
+          // setContactsList={setContactsList}
           contactsList={contactsList}
-          // handleAdd={handleAdd}
+					handleAdd={handleAdd}
         />
       </div>
       <footer className={classes.footer}>
