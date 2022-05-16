@@ -121,25 +121,16 @@ const Contacts = (props) => {
     setSelectedContact(contactData);
   };
 
-  const handleAdd = (val) => {
-    const newList = contactsList.concat({
-      id: Math.random(),
-      name: val.firstName + " " + val.lastName,
-      mobile: val.mobile,
-      home: val.home,
-      company: val.company,
-      work: val.work,
-      notes: val.notes,
-    });
-
-    setContactsList(newList);
-  };
-
   const handleDelete = (id) => {
     const updatedList = contactsList.filter((item) => item.id !== id);
 
     setContactsList(updatedList);
   };
+
+  // const handleEdit = () => {
+
+  // }
+
   return (
     <div
       className={
@@ -177,7 +168,7 @@ const Contacts = (props) => {
                     }
                     return null;
                   })
-                  .map((contact, index) => (
+                  .map((contact) => (
                     <div
                       className={classes["contacts-list"]}
                       onClick={() => contactClickHandler(contact)}
@@ -214,8 +205,9 @@ const Contacts = (props) => {
         <ContactInfo
           contact={selectedContact}
           setSelectedContact={setSelectedContact}
-          handleAdd={handleAdd}
           handleDelete={handleDelete}
+          contactsList={contactsList}
+          setContactsList={setContactsList}
         />
       </div>
       <footer className={classes.footer}>
