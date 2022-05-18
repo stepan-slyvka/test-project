@@ -15,6 +15,7 @@ const ContactInfo = (props) => {
 
   const showEdit = () => {
     setIsEditing(true);
+    setFormIsShown(true);
   };
 
   const showEl = () => {
@@ -33,6 +34,7 @@ const ContactInfo = (props) => {
     });
 
     props.setContactsList(newList);
+    props.setSelectedContact(val);
   };
 
   return (
@@ -66,6 +68,7 @@ const ContactInfo = (props) => {
           <ContactItem
             key={props.contact.id}
             name={props.contact.name}
+            surname={props.contact.surname}
             mobile={props.contact.mobile}
             home={props.contact.home}
             company={props.contact.company}
@@ -82,6 +85,14 @@ const ContactInfo = (props) => {
           <ContactEditForm
             setFormIsShown={setFormIsShown}
             setSelectedContact={props.setSelectedContact}
+            firstName={props.contact.name}
+            lastName={props.contact.surname}
+            mobile={props.contact.mobile}
+            home={props.contact.home}
+            company={props.contact.company}
+            work={props.contact.work}
+            notes={props.contact.notes}
+            handleEdit={props.handleEdit}
           />
         )}
       </main>

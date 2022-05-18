@@ -14,7 +14,9 @@ const ContactItem = (props) => {
             height="120px"
           ></img>
         </div>
-        <h1>{props.name}</h1>
+        <h1>
+          {props.name} {props.surname}
+        </h1>
       </div>
       <div className={classes["additional-contact-wrapper"]}>
         <div className={classes.useful}>

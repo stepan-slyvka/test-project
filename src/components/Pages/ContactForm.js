@@ -55,7 +55,7 @@ const ContactForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "Stepan",
+      firstName: "",
       lastName: "",
       mobile: "",
       home: "",

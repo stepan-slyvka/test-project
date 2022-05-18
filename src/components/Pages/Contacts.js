@@ -8,7 +8,8 @@ import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 const CONTACTS = [
   {
     id: "c1",
-    name: "Benjamin Jacobi",
+    name: "Benjamin",
+    surname: "Jacobi",
     mobile: "(023) 302-3161 x60451",
     home: "(136) 403-0476 x8388",
     company: "Casper Inc.",
@@ -18,7 +19,8 @@ const CONTACTS = [
   },
   {
     id: "c2",
-    name: "Clementina Hahn",
+    name: "Clementina",
+    surname: "Hahn",
     mobile: "686.292.3548 x7219",
     home: "447-343-4864 x414",
     company: "Marquardt Inc",
@@ -28,7 +30,8 @@ const CONTACTS = [
   },
   {
     id: "c3",
-    name: "Clinton Goyette",
+    name: "Clinton",
+    surname: "Goyette",
     mobile: "(913) 127-1563 x082",
     home: "(843) 501-8804",
     company: "Feil - Goodwin",
@@ -38,7 +41,8 @@ const CONTACTS = [
   },
   {
     id: "c4",
-    name: "Forrest Klein",
+    name: "Forrest",
+    surname: "Klein",
     mobile: "174-628-5802 x8324",
     home: "(047) 141-0247",
     company: "Wilkinson - Howe",
@@ -48,7 +52,8 @@ const CONTACTS = [
   },
   {
     id: "c5",
-    name: "General Kub",
+    name: "General",
+    surname: "Kub",
     mobile: "779.482.9824",
     home: "(698) 858-0337 x3273",
     company: "Moen Group",
@@ -58,7 +63,8 @@ const CONTACTS = [
   },
   {
     id: "c6",
-    name: "Lon Wunsch",
+    name: "Lon",
+    surname: "Wunsch",
     mobile: "(792) 607-6366 x88975",
     home: "447.683.3799 x38668",
     company: "Johns, Gibson and Schinner",
@@ -68,7 +74,8 @@ const CONTACTS = [
   },
   {
     id: "c7",
-    name: "Mabelle Kling",
+    name: "Mabelle",
+    surname: "Kling",
     mobile: "499-736-0779 x2409",
     home: "1-910-529-7393 x222",
     company: "Bins, Murray and Ryan",
@@ -78,7 +85,8 @@ const CONTACTS = [
   },
   {
     id: "c8",
-    name: "Maryse Koss",
+    name: "Maryse",
+    surname: "Koss",
     mobile: "668-920-9662 x610",
     home: "075.864.1819 x8265",
     company: "Smitham Inc",
@@ -88,7 +96,8 @@ const CONTACTS = [
   },
   {
     id: "c9",
-    name: "Maude Grant",
+    name: "Maude",
+    surname: "Grant",
     mobile: "1-077-505-0657",
     home: "062.968.4841 x62748",
     company: "Thiel, Bauch and Mosciski",
@@ -98,7 +107,8 @@ const CONTACTS = [
   },
   {
     id: "c10",
-    name: "Orrin Harris",
+    name: "Orrin",
+    surname: "Harris",
     mobile: "871.567.4877",
     home: "(466) 574-3352",
     company: "Haag Group",
@@ -127,9 +137,12 @@ const Contacts = (props) => {
     setContactsList(updatedList);
   };
 
-  // const handleEdit = () => {
-
-  // }
+  const handleEdit = (item) => {
+    const updatedItems = contactsList.map((el) =>
+      el.id === item.id ? item : el
+    );
+    setContactsList(updatedItems);
+  };
 
   return (
     <div
@@ -183,7 +196,9 @@ const Contacts = (props) => {
                         />
                       </div>
                       <div className={classes["name-wrapper"]}>
-                        <h3>{contact.name}</h3>
+                        <h3>
+                          {contact.name} {contact.surname}
+                        </h3>
                       </div>
                       <button
                         type="button"
@@ -208,6 +223,7 @@ const Contacts = (props) => {
           handleDelete={handleDelete}
           contactsList={contactsList}
           setContactsList={setContactsList}
+          handleEdit={handleEdit}
         />
       </div>
       <footer className={classes.footer}>

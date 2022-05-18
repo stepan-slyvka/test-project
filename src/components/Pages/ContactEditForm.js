@@ -55,16 +55,17 @@ const ContactEditForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      mobile: "",
-      home: "",
-      company: "",
-      work: "",
-      notes: "",
+      firstName: props.firstName,
+      lastName: props.lastName,
+      mobile: props.mobile,
+      home: props.home,
+      company: props.company,
+      work: props.work,
+      notes: props.notes,
     },
     validate,
     onSubmit: (val) => {
+      props.handleEdit(val);
       props.setFormIsShown(false);
       props.setSelectedContact(val);
     },
@@ -82,7 +83,9 @@ const ContactEditForm = (props) => {
           width="120px"
           height="120px"
         ></img>
-        <h1>No Name</h1>
+        <h1>
+          {props.firstName} {props.lastName}
+        </h1>
       </div>
       <div className={classes["inputs-wrapper"]}>
         <div className={classes["contact-wrapper"]}>
