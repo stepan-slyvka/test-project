@@ -15,6 +15,7 @@ const ContactInfo = (props) => {
 
   const showEdit = () => {
     setIsEditing(true);
+		setFormIsShown(true);
   };
 
   const showEl = () => {
@@ -62,6 +63,9 @@ const ContactInfo = (props) => {
         ) : (
           <div className={classes.buttons}></div>
         )}
+        
+        
+        
         {!formIsShown ? (
           <ContactItem
             key={props.contact.id}
