@@ -136,6 +136,20 @@ const Contacts = (props) => {
 
     setContactsList(updatedList);
   };
+  
+  const handleAddSuccess = (val) => {
+  	const contactData = {
+			company: val.company,
+			name: val.firstName,
+			home: val.home,
+			surname: val.lastName,
+			mobile: val.mobile,
+			notes: val.notes,
+			work: val.work
+		};
+  
+		setSelectedContact(contactData);
+	};
 
   const handleEdit = (item) => {
     const updatedItems = contactsList.map((el) =>
@@ -219,7 +233,7 @@ const Contacts = (props) => {
         </section>
         <ContactInfo
           contact={selectedContact}
-          setSelectedContact={setSelectedContact}
+          setSelectedContact={(val) => handleAddSuccess(val)}
           handleDelete={handleDelete}
           contactsList={contactsList}
           setContactsList={setContactsList}
