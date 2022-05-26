@@ -136,6 +136,20 @@ const Contacts = (props) => {
 
     setContactsList(updatedList);
   };
+  
+  const handleAddSuccess = (val) => {
+  	const contactData = {
+			company: val.company,
+			name: val.firstName,
+			home: val.home,
+			surname: val.lastName,
+			mobile: val.mobile,
+			notes: val.notes,
+			work: val.work
+		};
+  
+		setSelectedContact(contactData);
+	};
 
   const handleEditSuccess = (item) => {
     const updatedItems = contactsList.map((data) => {
