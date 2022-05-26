@@ -67,7 +67,6 @@ const ContactForm = (props) => {
     onSubmit: (val) => {
       props.handleAdd(val);
       props.setFormIsShown(false);
-      props.setSelectedContact(val);
     },
   });
 

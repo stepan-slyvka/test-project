@@ -7,7 +7,7 @@ import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const CONTACTS = [
   {
-    id: "c1",
+    id: Math.random(),
     name: "Benjamin",
     surname: "Jacobi",
     mobile: "(023) 302-3161 x60451",
@@ -18,7 +18,7 @@ const CONTACTS = [
       "Quisquam et nisi. Dicta in ut eos consequatur ipsum omnis.Quisquam doloremque error praesentium sapiente et vitae.Omnis facere sint nulla similique vel voluptatem officia deleniti",
   },
   {
-    id: "c2",
+    id: Math.random(),
     name: "Clementina",
     surname: "Hahn",
     mobile: "686.292.3548 x7219",
@@ -29,7 +29,7 @@ const CONTACTS = [
       "Distinctio voluptas repellendus rerum temporibus deserunt et corrupti sint. Odit sit labore quia. Perferendis iure eos qui tempore ex saepe consequuntur accusamus ipsa. Eius consectetur nam quas. Laborum aperiam hic dolorum quae autem consequatur.",
   },
   {
-    id: "c3",
+    id: Math.random(),
     name: "Clinton",
     surname: "Goyette",
     mobile: "(913) 127-1563 x082",
@@ -40,7 +40,7 @@ const CONTACTS = [
       "Maiores animi et quidem. Ducimus voluptate est consequatur ut vitae in. Ut fugit sit ab blanditiis ab occaecati soluta quis.",
   },
   {
-    id: "c4",
+    id: Math.random(),
     name: "Forrest",
     surname: "Klein",
     mobile: "174-628-5802 x8324",
@@ -51,7 +51,7 @@ const CONTACTS = [
       "Sit et non debitis. Quis atque facilis et sed. Illum adipisci deserunt corporis modi necessitatibus at numquam neque sint.",
   },
   {
-    id: "c5",
+    id: Math.random(),
     name: "General",
     surname: "Kub",
     mobile: "779.482.9824",
@@ -62,7 +62,7 @@ const CONTACTS = [
       "Quibusdam dolorem minima ea enim nostrum eos. Corrupti dolore velit molestiae nostrum error qui. Sit qui maxime sed quisquam rem cupiditate. Iste ex quidem. Ipsam et quia omnis facere blanditiis.",
   },
   {
-    id: "c6",
+    id: Math.random(),
     name: "Lon",
     surname: "Wunsch",
     mobile: "(792) 607-6366 x88975",
@@ -73,7 +73,7 @@ const CONTACTS = [
       "Velit non voluptas sed sit pariatur earum unde neque. Incidunt nam reprehenderit non mollitia. Incidunt quo illum modi ex eos consequuntur eius nihil itaque. Quis tenetur ratione repudiandae ea et architecto dolorem porro. Rem non consectetur ea iste.",
   },
   {
-    id: "c7",
+    id: Math.random(),
     name: "Mabelle",
     surname: "Kling",
     mobile: "499-736-0779 x2409",
@@ -84,7 +84,7 @@ const CONTACTS = [
       "Et et rerum placeat beatae doloribus earum et reiciendis. Nisi suscipit ad dolor. Tenetur hic quia nihil deleniti inventore. Blanditiis aliquam ea ea. Omnis consequatur itaque est rerum sed reiciendis laboriosam reiciendis. Consectetur ullam et laudantium at itaque aut qui et molestiae.",
   },
   {
-    id: "c8",
+    id: Math.random(),
     name: "Maryse",
     surname: "Koss",
     mobile: "668-920-9662 x610",
@@ -95,7 +95,7 @@ const CONTACTS = [
       "Libero perferendis aut repudiandae quas. Omnis aut enim voluptas magnam harum quisquam illo aliquid aliquam. Dolor et et vel nihil quibusdam fugit facere adipisci aut. Repellat quia est beatae animi ipsa. Ad sit eligendi pariatur quia illo atque qui voluptatem excepturi.",
   },
   {
-    id: "c9",
+    id: Math.random(),
     name: "Maude",
     surname: "Grant",
     mobile: "1-077-505-0657",
@@ -106,7 +106,7 @@ const CONTACTS = [
       "Ut sit fuga quibusdam. Ullam non necessitatibus voluptatem quidem est dignissimos dolores quaerat. Aspernatur fugiat et.",
   },
   {
-    id: "c10",
+    id: Math.random(),
     name: "Orrin",
     surname: "Harris",
     mobile: "871.567.4877",
@@ -137,11 +137,38 @@ const Contacts = (props) => {
     setContactsList(updatedList);
   };
 
-  const handleEdit = (item) => {
-    const updatedItems = contactsList.map((el) =>
-      el.id === item.id ? item : el
-    );
+  const handleEditSuccess = (item) => {
+    const updatedItems = contactsList.map((data) => {
+      if (item.id === data.id) {
+        return [
+          {
+            company: item.company,
+            name: item.firstName,
+            home: item.home,
+            surname: item.lastName,
+            mobile: item.mobile,
+            notes: item.notes,
+            work: item.work,
+          },
+        ];
+      }
+      return data;
+    });
     setContactsList(updatedItems);
+  };
+
+  const handleAddSuccess = (val) => {
+    const contactData = {
+      company: val.company,
+      name: val.firstName,
+      home: val.home,
+      surname: val.lastName,
+      mobile: val.mobile,
+      notes: val.notes,
+      work: val.work,
+    };
+
+    setSelectedContact(contactData);
   };
 
   return (
@@ -176,6 +203,12 @@ const Contacts = (props) => {
                       return val;
                     } else if (
                       val.name.toLowerCase().includes(searchName.toLowerCase())
+                    ) {
+                      return val;
+                    } else if (
+                      val.surname
+                        .toLowerCase()
+                        .includes(searchName.toLowerCase())
                     ) {
                       return val;
                     }
@@ -219,11 +252,11 @@ const Contacts = (props) => {
         </section>
         <ContactInfo
           contact={selectedContact}
-          setSelectedContact={setSelectedContact}
+          setSelectedContact={(val) => handleAddSuccess(val)}
           handleDelete={handleDelete}
           contactsList={contactsList}
           setContactsList={setContactsList}
-          handleEdit={handleEdit}
+          handleEditSuccess={handleEditSuccess}
         />
       </div>
       <footer className={classes.footer}>

@@ -66,6 +66,7 @@ const ContactEditForm = (props) => {
     validate,
     onSubmit: (val) => {
       props.handleEdit(val);
+      props.handleEditSuccess(val);
       props.setFormIsShown(false);
       props.setSelectedContact(val);
     },
