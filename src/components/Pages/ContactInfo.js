@@ -70,8 +70,7 @@ const ContactInfo = (props) => {
       console.log("data-" + data.id);
       if (data.id === item.id) {
         console.log("id matches");
-        return [
-          {
+        return  {
             company: item.company,
             name: item.firstName,
             home: item.home,
@@ -80,14 +79,13 @@ const ContactInfo = (props) => {
             notes: item.notes,
             work: item.work,
             id: item.id,
-          },
-        ];
+          };
       }
       return data;
     });
     console.log(item);
-    props.setContactsList(updatedItems);
     console.log(updatedItems);
+    props.setContactsList(updatedItems);
   };
 
   return (
