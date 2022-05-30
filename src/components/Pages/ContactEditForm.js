@@ -55,6 +55,7 @@ const ContactEditForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
+      id: props.id,
       firstName: props.firstName,
       lastName: props.lastName,
       mobile: props.mobile,
@@ -66,9 +67,9 @@ const ContactEditForm = (props) => {
     validate,
     onSubmit: (val) => {
       props.handleEdit(val);
-      props.handleEditSuccess(val);
-      props.setFormIsShown(false);
       props.setSelectedContact(val);
+      props.setFormIsShown(false);
+      props.handleEditSuccess(val);
     },
   });
 

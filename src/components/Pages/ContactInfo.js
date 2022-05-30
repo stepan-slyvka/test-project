@@ -64,6 +64,32 @@ const ContactInfo = (props) => {
     props.setContactsList[updatedItems] = props.contactsList;
   };
 
+  const handleEditSuccess = (item) => {
+    const updatedItems = props.contactsList.map((data) => {
+      console.log("item-" + item.id);
+      console.log("data-" + data.id);
+      if (data.id === item.id) {
+        console.log("id matches");
+        return [
+          {
+            company: item.company,
+            name: item.firstName,
+            home: item.home,
+            surname: item.lastName,
+            mobile: item.mobile,
+            notes: item.notes,
+            work: item.work,
+            id: item.id,
+          },
+        ];
+      }
+      return data;
+    });
+    console.log(item);
+    props.setContactsList(updatedItems);
+    console.log(updatedItems);
+  };
+
   return (
     <section className={classes["contact-info"]}>
       <main className={classes["contact-better"]}>
@@ -94,7 +120,7 @@ const ContactInfo = (props) => {
 
         {!formIsShown ? (
           <ContactItem
-            key={props.contact.id}
+            id={props.contact.id}
             name={props.contact.name}
             surname={props.contact.surname}
             mobile={props.contact.mobile}
@@ -114,6 +140,7 @@ const ContactInfo = (props) => {
           <ContactEditForm
             setFormIsShown={setFormIsShown}
             setSelectedContact={props.setSelectedContact}
+            id={props.contact.id}
             firstName={props.contact.name}
             lastName={props.contact.surname}
             mobile={props.contact.mobile}
@@ -122,7 +149,7 @@ const ContactInfo = (props) => {
             work={props.contact.work}
             notes={props.contact.notes}
             handleEdit={handleEdit}
-            handleEditSuccess={props.handleEditSuccess}
+            handleEditSuccess={handleEditSuccess}
           />
         )}
       </main>

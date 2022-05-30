@@ -136,40 +136,6 @@ const Contacts = (props) => {
 
     setContactsList(updatedList);
   };
-  
-  const handleAddSuccess = (val) => {
-  	const contactData = {
-			company: val.company,
-			name: val.firstName,
-			home: val.home,
-			surname: val.lastName,
-			mobile: val.mobile,
-			notes: val.notes,
-			work: val.work
-		};
-  
-		setSelectedContact(contactData);
-	};
-
-  const handleEditSuccess = (item) => {
-    const updatedItems = contactsList.map((data) => {
-      if (item.id === data.id) {
-        return [
-          {
-            company: item.company,
-            name: item.firstName,
-            home: item.home,
-            surname: item.lastName,
-            mobile: item.mobile,
-            notes: item.notes,
-            work: item.work,
-          },
-        ];
-      }
-      return data;
-    });
-    setContactsList(updatedItems);
-  };
 
   const handleAddSuccess = (val) => {
     const contactData = {
@@ -180,9 +146,11 @@ const Contacts = (props) => {
       mobile: val.mobile,
       notes: val.notes,
       work: val.work,
+      id: Math.random(),
     };
 
     setSelectedContact(contactData);
+    console.log(contactData);
   };
 
   return (
@@ -228,11 +196,11 @@ const Contacts = (props) => {
                     }
                     return null;
                   })
-                  .map((contact) => (
+                  .map((contact, index) => (
                     <div
                       className={classes["contacts-list"]}
                       onClick={() => contactClickHandler(contact)}
-                      key={contact.id}
+                      key={index}
                     >
                       <div className={classes["image-wrapper"]}>
                         <img
@@ -270,7 +238,6 @@ const Contacts = (props) => {
           handleDelete={handleDelete}
           contactsList={contactsList}
           setContactsList={setContactsList}
-          handleEditSuccess={handleEditSuccess}
         />
       </div>
       <footer className={classes.footer}>
