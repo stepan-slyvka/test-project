@@ -115,3 +115,14 @@
   font-size: 8pt;
   text-align: center;
 }
+
+/* Mobile */
+
+@media (max-width: 500px) {
+  .add-contact-wrapper {
+    display: flex;
+    padding: 0 30px;
+    height: 80%;
+    flex-direction: column;
+  }
+}

@@ -66,28 +66,21 @@ const ContactInfo = (props) => {
 
   const handleEditSuccess = (item) => {
     const updatedItems = props.contactsList.map((data) => {
-      console.log("item-" + item.id);
-      console.log("data-" + data.id);
       if (data.id === item.id) {
-        console.log("id matches");
-        return [
-          {
-            company: item.company,
-            name: item.firstName,
-            home: item.home,
-            surname: item.lastName,
-            mobile: item.mobile,
-            notes: item.notes,
-            work: item.work,
-            id: item.id,
-          },
-        ];
+        return {
+          company: item.company,
+          name: item.firstName,
+          home: item.home,
+          surname: item.lastName,
+          mobile: item.mobile,
+          notes: item.notes,
+          work: item.work,
+          id: item.id,
+        };
       }
       return data;
     });
-    console.log(item);
     props.setContactsList(updatedItems);
-    console.log(updatedItems);
   };
 
   return (

@@ -135,6 +135,7 @@ const Contacts = (props) => {
     const updatedList = contactsList.filter((item) => item.id !== id);
 
     setContactsList(updatedList);
+    setSelectedContact(null);
   };
 
   const handleAddSuccess = (val) => {
@@ -150,7 +151,6 @@ const Contacts = (props) => {
     };
 
     setSelectedContact(contactData);
-    console.log(contactData);
   };
 
   return (
@@ -232,13 +232,17 @@ const Contacts = (props) => {
             </div>
           </main>
         </section>
-        <ContactInfo
-          contact={selectedContact}
-          setSelectedContact={(val) => handleAddSuccess(val)}
-          handleDelete={handleDelete}
-          contactsList={contactsList}
-          setContactsList={setContactsList}
-        />
+        {selectedContact ? (
+          <ContactInfo
+            contact={selectedContact}
+            setSelectedContact={(val) => handleAddSuccess(val)}
+            handleDelete={handleDelete}
+            contactsList={contactsList}
+            setContactsList={setContactsList}
+          />
+        ) : (
+          <div className={classes["contact-info-null"]}></div>
+        )}
       </div>
       <footer className={classes.footer}>
         Isomorphic @ 2022 Created by RedQ, Inc

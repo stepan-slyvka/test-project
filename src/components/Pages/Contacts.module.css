@@ -200,6 +200,19 @@
   color: rgba(0, 0, 0, 0.65);
 }
 
+.contact-info-null {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgb(255, 255, 255);
+  border-top: 1px solid rgb(233, 233, 233);
+  border-bottom: 1px solid rgb(233, 233, 233);
+  border-image: initial;
+  border-left: 0px;
+  border-right: inherit;
+  position: relative;
+}
+
 /* Smartphone */
 @media (max-width: 500px) {
   .isomorphic-content {
@@ -228,6 +241,9 @@
   }
   .add-new-user-btn {
     height: 35px;
+  }
+  .footer {
+    display: none;
   }
 }
 
