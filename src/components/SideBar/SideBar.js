@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -26,53 +26,58 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import classes from "../SideBar/SideBar.module.css";
 
+import Context from "../context/contacts-context";
+
 const SideBar = (props) => {
-  const [isShown, setIsShown] = useState(false);
-  const [isMaps, setIsMaps] = useState(false);
-  const [isFirestore, setIsFirestore] = useState(false);
-  const [isCharts, setIsCharts] = useState(false);
-  const [isForms, setIsForms] = useState(false);
-  const [isUI, setIsUI] = useState(false);
-  const [isAdvanced, setIsAdvanced] = useState(false);
-  const [isFeedback, setIsFeedback] = useState(false);
-  const [isTables, setIsTables] = useState(false);
+  // OLD CODE! SAVE AS REFERENCE!
 
-  const toggleMenu = () => {
-    setIsShown(!isShown);
-  };
+  // const [isShown, setIsShown] = useState(false);
+  // const [isMaps, setIsMaps] = useState(false);
+  // const [isFirestore, setIsFirestore] = useState(false);
+  // const [isCharts, setIsCharts] = useState(false);
+  // const [isForms, setIsForms] = useState(false);
+  // const [isUI, setIsUI] = useState(false);
+  // const [isAdvanced, setIsAdvanced] = useState(false);
+  // const [isFeedback, setIsFeedback] = useState(false);
+  // const [isTables, setIsTables] = useState(false);
 
-  const toggleMaps = () => {
-    setIsMaps(!isMaps);
-  };
+  // const toggleMenu = () => {
+  //   setIsShown(!isShown);
+  // };
 
-  const toggleFirestore = () => {
-    setIsFirestore(!isFirestore);
-  };
+  // const toggleMaps = () => {
+  //   setIsMaps(!isMaps);
+  // };
 
-  const toggleCharts = () => {
-    setIsCharts(!isCharts);
-  };
+  // const toggleFirestore = () => {
+  //   setIsFirestore(!isFirestore);
+  // };
 
-  const toggleForms = () => {
-    setIsForms(!isForms);
-  };
+  // const toggleCharts = () => {
+  //   setIsCharts(!isCharts);
+  // };
 
-  const toggleUI = () => {
-    setIsUI(!isUI);
-  };
+  // const toggleForms = () => {
+  //   setIsForms(!isForms);
+  // };
 
-  const toggleAdvanced = () => {
-    setIsAdvanced(!isAdvanced);
-  };
+  // const toggleUI = () => {
+  //   setIsUI(!isUI);
+  // };
 
-  const toggleFeedback = () => {
-    setIsFeedback(!isFeedback);
-  };
+  // const toggleAdvanced = () => {
+  //   setIsAdvanced(!isAdvanced);
+  // };
 
-  const toggleTables = () => {
-    setIsTables(!isTables);
-  };
+  // const toggleFeedback = () => {
+  //   setIsFeedback(!isFeedback);
+  // };
 
+  // const toggleTables = () => {
+  //   setIsTables(!isTables);
+  // };
+
+  const toggleCtx = useContext(Context);
   return (
     <aside
       className={props.isShrinkedSidebar ? classes.shrinked : classes.aside}
@@ -155,7 +160,7 @@ const SideBar = (props) => {
                 <Link
                   to="/ecommerce"
                   className={classes["container-item"]}
-                  onClick={toggleMenu}
+                  onClick={toggleCtx.toggleMenu}
                 >
                   <div
                     className={
@@ -183,7 +188,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isShown && (
+                {toggleCtx.isShown && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/shop">Shop</Link>
@@ -204,7 +209,7 @@ const SideBar = (props) => {
                 <Link
                   to="/maps"
                   className={classes["container-item"]}
-                  onClick={toggleMaps}
+                  onClick={toggleCtx.toggleMaps}
                 >
                   <div
                     className={
@@ -232,7 +237,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isMaps && (
+                {toggleCtx.isMaps && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/google-map">Google Map</Link>
@@ -443,7 +448,7 @@ const SideBar = (props) => {
                 <Link
                   to="/firestore-curd"
                   className={classes["container-item"]}
-                  onClick={toggleFirestore}
+                  onClick={toggleCtx.toggleFirestore}
                 >
                   <div
                     className={
@@ -471,7 +476,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isFirestore && (
+                {toggleCtx.isFirestore && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/articles">Articles</Link>
@@ -542,7 +547,7 @@ const SideBar = (props) => {
                 <Link
                   to="/charts"
                   className={classes["container-item"]}
-                  onClick={toggleCharts}
+                  onClick={toggleCtx.toggleCharts}
                 >
                   <div
                     className={
@@ -570,7 +575,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isCharts && (
+                {toggleCtx.isCharts && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/google-carts">Google Carts</Link>
@@ -591,7 +596,7 @@ const SideBar = (props) => {
                 <Link
                   to="/forms"
                   className={classes["container-item"]}
-                  onClick={toggleForms}
+                  onClick={toggleCtx.toggleForms}
                 >
                   <div
                     className={
@@ -619,7 +624,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isForms && (
+                {toggleCtx.isForms && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/input">Input</Link>
@@ -663,7 +668,7 @@ const SideBar = (props) => {
                 <Link
                   to="/ui-elements"
                   className={classes["container-item"]}
-                  onClick={toggleUI}
+                  onClick={toggleCtx.toggleUI}
                 >
                   <div
                     className={
@@ -691,7 +696,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isUI && (
+                {toggleCtx.isUI && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/badge">Badge</Link>
@@ -739,7 +744,7 @@ const SideBar = (props) => {
                 <Link
                   to="/advanced-elements"
                   className={classes["container-item"]}
-                  onClick={toggleAdvanced}
+                  onClick={toggleCtx.toggleAdvanced}
                 >
                   <div
                     className={
@@ -767,7 +772,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isAdvanced && (
+                {toggleCtx.isAdvanced && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/react-dates">React Dates</Link>
@@ -788,7 +793,7 @@ const SideBar = (props) => {
                 <Link
                   to="/feedback"
                   className={classes["container-item"]}
-                  onClick={toggleFeedback}
+                  onClick={toggleCtx.toggleFeedback}
                 >
                   <div
                     className={
@@ -816,7 +821,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isFeedback && (
+                {toggleCtx.isFeedback && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/alert">Alert</Link>
@@ -843,7 +848,7 @@ const SideBar = (props) => {
                 <Link
                   to="/tables"
                   className={classes["container-item"]}
-                  onClick={toggleTables}
+                  onClick={toggleCtx.toggleTables}
                 >
                   <div
                     className={
@@ -871,7 +876,7 @@ const SideBar = (props) => {
                   )}
                   {props.isShrinkedSidebar && null}
                 </Link>
-                {isTables && (
+                {toggleCtx.isTables && (
                   <ul className={classes.list}>
                     <li className={classes.items}>
                       <Link to="/ecommerce/ant-tables">Ant Tables</Link>

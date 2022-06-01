@@ -3,7 +3,7 @@ import { Fragment } from "react/cjs/react.production.min";
 
 import Layout from "./components/Layout/Layout";
 import SideBar from "./components/SideBar/SideBar";
-import Contacts from "./components/Pages/Contacts";
+import Contacts from "./components/Pages/Contacts/Contacts";
 
 function App() {
   const [isShrinked, setIsShrinked] = useState(false);

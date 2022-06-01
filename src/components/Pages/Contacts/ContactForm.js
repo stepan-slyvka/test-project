@@ -1,10 +1,10 @@
 import React from "react";
 
-import classes from "../Pages/ContactEditForm.module.css";
+import classes from "../Contacts/ContactForm.module.css";
 
 import { useFormik } from "formik";
 
-const ContactEditForm = (props) => {
+const ContactForm = (props) => {
   const validate = (values) => {
     const errors = {};
 
@@ -55,21 +55,18 @@ const ContactEditForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      id: props.id,
-      firstName: props.firstName,
-      lastName: props.lastName,
-      mobile: props.mobile,
-      home: props.home,
-      company: props.company,
-      work: props.work,
-      notes: props.notes,
+      firstName: "",
+      lastName: "",
+      mobile: "",
+      home: "",
+      company: "",
+      work: "",
+      notes: "",
     },
     validate,
     onSubmit: (val) => {
-      props.handleEdit(val);
-      props.setSelectedContact(val);
+      props.handleAdd(val);
       props.setFormIsShown(false);
-      props.handleEditSuccess(val);
     },
   });
 
@@ -85,9 +82,7 @@ const ContactEditForm = (props) => {
           width="120px"
           height="120px"
         ></img>
-        <h1>
-          {props.firstName} {props.lastName}
-        </h1>
+        <h1>No Name</h1>
       </div>
       <div className={classes["inputs-wrapper"]}>
         <div className={classes["contact-wrapper"]}>
@@ -217,4 +212,4 @@ const ContactEditForm = (props) => {
   );
 };
 
-export default ContactEditForm;
+export default ContactForm;

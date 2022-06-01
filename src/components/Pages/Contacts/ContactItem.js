@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./ContactItem.module.css";
+import classes from "../Contacts/ContactItem.module.css";
 
 const ContactItem = (props) => {
   return (

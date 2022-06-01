@@ -1,26 +1,49 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
-import classes from "../Pages/ContactInfo.module.css";
+import classes from "../Contacts/ContactInfo.module.css";
 
-import ContactItem from "../Pages/ContactItem";
-import ContactForm from "./ContactForm";
-import ContactEditForm from "./ContactEditForm";
+import ContactItem from "../Contacts/ContactItem";
+import ContactForm from "../Contacts/ContactForm";
+import ContactEditForm from "../Contacts/ContactEditForm";
+import Context from "../../context/contacts-context";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
 
+// TRYING OUT USEREDUCER HOOK
+
+// const formReducer = (state, action) => {
+//   if (action.type === "SHOW_EDIT") {
+//     return { formIsShown: true, isEditing: true };
+//   }
+//   if (action.type === "SHOW_FORM") {
+//     return { formIsShown: true, isEditing: false };
+//   }
+//   return { formIsShown: false, isEditing: false };
+// };
+
 const ContactInfo = (props) => {
-  const [formIsShown, setFormIsShown] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  const ctx = useContext(Context);
+  // THIS IS OLD VERSION! DON'T DELETE CODE!
 
-  const showEdit = () => {
-    setIsEditing(true);
-    setFormIsShown(true);
-  };
+  // const [formIsShown, setFormIsShown] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
 
-  const showForm = () => {
-    setFormIsShown(true);
-  };
+  // // const [formState, dispatchForm] = useReducer(formReducer, {
+  // //   formIsShown: false,
+  // //   isEditing: false,
+  // // });
+
+  // const showEdit = () => {
+  //   setIsEditing(true);
+  //   setFormIsShown(true);
+  //   // dispatchForm({ type: "SHOW_EDIT" });
+  // };
+
+  // const showForm = () => {
+  //   setFormIsShown(true);
+  //   // dispatchForm({ type: "SHOW_FORM" });
+  // };
 
   const handleAdd = (val) => {
     const newList = props.contactsList.concat({
@@ -86,10 +109,10 @@ const ContactInfo = (props) => {
   return (
     <section className={classes["contact-info"]}>
       <main className={classes["contact-better"]}>
-        {!formIsShown ? (
+        {!ctx.formIsShown ? (
           <div className={classes.buttons}>
-            {!formIsShown ? (
-              <button onClick={showEdit} className={classes.pencil}>
+            {!ctx.formIsShown ? (
+              <button onClick={ctx.showEdit} className={classes.pencil}>
                 <FontAwesomeIcon icon={faPencil} />
               </button>
             ) : (
@@ -103,7 +126,10 @@ const ContactInfo = (props) => {
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
-            <button className={classes["add-new-user-btn"]} onClick={showForm}>
+            <button
+              className={classes["add-new-user-btn"]}
+              onClick={ctx.showForm}
+            >
               Add New Contact
             </button>
           </div>
@@ -111,7 +137,7 @@ const ContactInfo = (props) => {
           <div className={classes.buttons}></div>
         )}
 
-        {!formIsShown ? (
+        {!ctx.formIsShown ? (
           <ContactItem
             id={props.contact.id}
             name={props.contact.name}
@@ -122,16 +148,16 @@ const ContactInfo = (props) => {
             work={props.contact.work}
             notes={props.contact.notes}
           />
-        ) : !isEditing ? (
+        ) : !ctx.isEditing ? (
           <ContactForm
-            setFormIsShown={setFormIsShown}
+            setFormIsShown={ctx.setFormIsShown}
             handleAdd={handleAdd}
             setSelectedContact={props.setSelectedContact}
-            setIsEditing={setIsEditing}
+            setIsEditing={ctx.setIsEditing}
           />
         ) : (
           <ContactEditForm
-            setFormIsShown={setFormIsShown}
+            setFormIsShown={ctx.setFormIsShown}
             setSelectedContact={props.setSelectedContact}
             id={props.contact.id}
             firstName={props.contact.name}

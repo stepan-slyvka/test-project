@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import classes from "../Pages/Contacts.module.css";
-import ContactInfo from "./ContactInfo";
+import classes from "../Contacts/Contacts.module.css";
+import ContactInfo from "../Contacts/ContactInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
