@@ -1,8 +1,21 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+import { INVOICES } from "../../store/invoice-slice";
+import { uiActions } from "../../store/ui-slice";
+import { ITEMS } from "../../store/invoice-slice";
+
 import classes from "./InvoiceItem.module.css";
 
 const InvoiceItem = (props) => {
+  const dispatch = useDispatch();
+
+  const toggleViewPage = () => {
+    dispatch(uiActions.toggleViewPage());
+  };
+
+  let counter = 1;
+
   return (
     <section className={classes.section}>
       <main
@@ -16,7 +29,7 @@ const InvoiceItem = (props) => {
                   <button
                     type="button"
                     className={classes["go-to-invoices"]}
-                    onClick={props.showEl}
+                    onClick={toggleViewPage}
                   >
                     Go To Invoices
                   </button>
@@ -25,114 +38,111 @@ const InvoiceItem = (props) => {
                   </button>
                 </div>
               </div>
-              <div className={classes.content}>
-                <div className={classes["invoice-info"]}>
-                  <div className={classes.info}>
-                    <h3>Invoice Info</h3>
-                    <span>#1231</span>
-                  </div>
-                  <div className={classes.order}>
-                    <p>
-                      <span className={classes["order-status"]}>
-                        Order Status:
-                      </span>
-                      <span className={classes.status}> Shipped</span>
-                    </p>
-                    <p>
-                      <span className={classes["order-date"]}>Order Date:</span>
-                      <span className={classes.date}> February 17th 2018</span>
-                    </p>
-                  </div>
-                </div>
-                <div className={classes.bills}>
-                  <div className={classes["bill-from"]}>
-                    <h3>Bill From</h3>
-                    <div>
-                      <p className={classes["bill-from-info"]}>
-                        <span className={classes.name}>Pineapple Inc.</span>
-                        <span className={classes.email}>
-                          pineapple@company.com
-                          <br></br>
-                          <br></br> 86781 547th Ave, Osmond,
-                          <br></br> NE, 68765
-                          <br></br>
-                          <br></br> Phone: +(402) 748-3970
+              {INVOICES.map((invoice, index) => (
+                <div className={classes.content} key={index}>
+                  <div className={classes["invoice-info"]}>
+                    <div className={classes.info}>
+                      <h3>Invoice Info</h3>
+                      <span>{invoice.invoice_num}</span>
+                    </div>
+                    <div className={classes.order}>
+                      <p>
+                        <span className={classes["order-status"]}>
+                          Order Status:
+                        </span>
+                        <span className={classes.status}>{invoice.status}</span>
+                      </p>
+                      <p>
+                        <span className={classes["order-date"]}>
+                          Order Date:
+                        </span>
+                        <span className={classes.date}>
+                          {invoice.order_date}
                         </span>
                       </p>
                     </div>
                   </div>
-                  <div className={classes["bill-to"]}>
-                    <h3>Bill To</h3>
-                    <p className={classes["bill-to-info"]}>
-                      <span className={classes.name}>REDQ Inc.</span>
-                      <span className={classes.email}>
-                        redq@company.com <br></br>
-                        <br></br> 405 Mulberry Rd, Mc Grady, <br></br> NC, 28649
-                        <br></br>
-                        <br></br>Fax: +0(863) 228-7064 <br></br> Phone: +(740)
-                        927-9284
-                      </span>
+                  <div className={classes.bills}>
+                    <div className={classes["bill-from"]}>
+                      <h3>Bill From</h3>
+                      <div>
+                        <p className={classes["bill-from-info"]}>
+                          <span className={classes.name}>
+                            {invoice.bill_from}
+                          </span>
+                          <span className={classes.email}>
+                            {invoice.bill_from_email}
+                            <br></br>
+                            <br></br> {invoice.bill_from_address}
+                            <br></br>
+                            <br></br>
+                            <br></br> {invoice.bill_from_phone}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className={classes["bill-to"]}>
+                      <h3>Bill To</h3>
+                      <p className={classes["bill-to-info"]}>
+                        <span className={classes.name}>{invoice.bill_to}</span>
+                        <span className={classes.email}>
+                          {invoice.bill_to_email} <br></br>
+                          <br></br> {invoice.bill_to_address} <br></br>
+                          <br></br>
+                          <br></br>
+                          {invoice.bill_to_fax} <br></br>{" "}
+                          {invoice.bill_to_phone}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className={classes.table}>
+                    <table>
+                      <colgroup>
+                        <col className={classes.col1}></col>
+                        <col className={classes.col2}></col>
+                        <col className={classes.col3}></col>
+                        <col className={classes.col4}></col>
+                        <col className={classes.col5}></col>
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <td>#</td>
+                          <td>Item Name</td>
+                          <td>Unit Costs</td>
+                          <td>Unit</td>
+                          <td>Price</td>
+                        </tr>
+                      </thead>
+                      {ITEMS.map((items, index) => (
+                        <tbody key={index}>
+                          <tr>
+                            <td>{counter++}</td>
+                            <td>{items.item_name}</td>
+                            <td>{items.unit_costs}</td>
+                            <td>{items.unit}</td>
+                            <td>{items.price}</td>
+                          </tr>
+                        </tbody>
+                      ))}
+                    </table>
+                  </div>
+                  <div className={classes.total}>
+                    <p>
+                      Sub-total:
+                      <span>$13300</span>
                     </p>
+                    <p>
+                      Vat:
+                      <span>$13300</span>
+                    </p>
+                    <h3>
+                      Grand Total:
+                      <span>$14630</span>
+                    </h3>
                   </div>
                 </div>
-                <div className={classes.table}>
-                  <table>
-                    <colgroup>
-                      <col className={classes.col1}></col>
-                      <col className={classes.col2}></col>
-                      <col className={classes.col3}></col>
-                      <col className={classes.col4}></col>
-                      <col className={classes.col5}></col>
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <td>#</td>
-                        <td>Item Name</td>
-                        <td>Unit Costs</td>
-                        <td>Unit</td>
-                        <td>Price</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>A box of happiness</td>
-                        <td>200</td>
-                        <td>14</td>
-                        <td>2800</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Unicorn Tears</td>
-                        <td>500</td>
-                        <td>14</td>
-                        <td>7000</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Rainbow Machine</td>
-                        <td>700</td>
-                        <td>5</td>
-                        <td>3500</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className={classes.total}>
-                  <p>
-                    Sub-total:
-                    <span>$13300</span>
-                  </p>
-                  <p>
-                    Vat:
-                    <span>$13300</span>
-                  </p>
-                  <h3>
-                    Grand Total:
-                    <span>$14630</span>
-                  </h3>
-                </div>
-              </div>
+              ))}
               <div className={classes["lower-btn"]}>
                 <button type="button">Send Invoice</button>
               </div>

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+
+import { useSelector } from "react-redux";
 
 import { Fragment } from "react";
 
@@ -6,25 +8,14 @@ import InvoiceItem from "./InvoiceItem";
 import AllInvoices from "./AllInvoices";
 
 const Invoices = (props) => {
-  const [viewInfo, setViewInfo] = useState(false);
-
-  const showInfo = () => {
-    setViewInfo(!viewInfo);
-  };
-
-  const show = () => {
-    setViewInfo(false);
-  };
+  const showViewPage = useSelector((state) => state.ui.viewPageIsVisible);
 
   return (
     <Fragment>
-      {viewInfo ? (
-        <InvoiceItem showEl={show} isShrinked={props.isShrinkedContent} />
+      {showViewPage ? (
+        <InvoiceItem isShrinked={props.isShrinkedContent} />
       ) : (
-        <AllInvoices
-          toggleInfo={showInfo}
-          isShrinked={props.isShrinkedContent}
-        />
+        <AllInvoices isShrinked={props.isShrinkedContent} />
       )}
     </Fragment>
   );
