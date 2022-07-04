@@ -19,10 +19,26 @@ import { invoiceActions } from "../../store/invoice-slice";
 const AddInvoiceItem = (props) => {
   // const {} = props;
 
-  const [startDate, setStartDate] = useState(new Date());
+  const options = ["Pending", "Shipped", "Delivered"];
 
-  const addInvoice = () => {
-    dispatch(invoiceActions.addNewInvoice());
+  const [startDate, setStartDate] = useState(new Date());
+  const [selectedOption, setSelectedOption] = useState("Pending");
+
+  const optionClickHandler = (value) => () => {
+    setSelectedOption(value);
+    dispatch(uiActions.toggleMoreOptions());
+  };
+
+  const addInvoiceHandler = (invoice) => {
+    dispatch(
+      invoiceActions.addNewInvoice({
+        invoiceNumber: invoice.number,
+        billFrom: invoice.bill_from,
+        billFromAddress: invoice.bill_from_address,
+        billTo: invoice.bill_to,
+        billToAddress: invoice.bill_to_address,
+      })
+    );
   };
 
   const formikInvoice = useFormik({
@@ -35,10 +51,11 @@ const AddInvoiceItem = (props) => {
       itemName: "",
       unitCosts: "",
       unit: "",
-      date: startDate,
+      // date: startDate,
     },
     onSubmit: (val) => {
-      addInvoice(val);
+      dispatch(invoiceActions.addNewInvoice(val));
+      dispatch(uiActions.toggleAddInvoice());
     },
   });
 
@@ -79,9 +96,9 @@ const AddInvoiceItem = (props) => {
                   Cancel
                 </button>
                 <button
-                  type="button"
+                  type="submit"
                   className={classes["save-btn"]}
-                  onClick={addInvoice}
+                  onClick={addInvoiceHandler}
                 >
                   Save
                 </button>
@@ -92,7 +109,11 @@ const AddInvoiceItem = (props) => {
                   <input
                     placeholder="Number"
                     type="text"
-                    defaultValue="#1655387645882"
+                    name="invoiceNumber"
+                    id="invoiceNumber"
+                    onChange={formikInvoice.handleChange}
+                    value={formikInvoice.values.invoiceNumber}
+                    onBlur={formikInvoice.handleBlur}
                   ></input>
                 </div>
                 <div className={classes["right-side-column"]}>
@@ -101,13 +122,21 @@ const AddInvoiceItem = (props) => {
                     <div className={classes.buttons}>
                       {showOtherOptions && (
                         <ul className={classes.options}>
-                          <li>Pending</li>
-                          <li>Shipped</li>
-                          <li>Delivered</li>
+                          {options.map((option) => (
+                            <li
+                              onClick={optionClickHandler(option)}
+                              key={Math.random()}
+                            >
+                              {option}
+                            </li>
+                          ))}
                         </ul>
                       )}
-                      <button className={classes.status}>Pending</button>
+                      <button type="button" className={classes.status}>
+                        {selectedOption}
+                      </button>
                       <button
+                        type="button"
                         className={classes.dots}
                         onClick={toggleMoreOptions}
                       >
@@ -131,12 +160,42 @@ const AddInvoiceItem = (props) => {
               </div>
               <div className={classes["order-bills"]}>
                 <div className={classes["bill-from"]}>
-                  <input placeholder="Bill From" type="text"></input>
-                  <textarea placeholder="Bill From Address"></textarea>
+                  <input
+                    placeholder="Bill From"
+                    type="text"
+                    name="billFrom"
+                    id="billFrom"
+                    onChange={formikInvoice.handleChange}
+                    value={formikInvoice.values.billFrom}
+                    onBlur={formikInvoice.handleBlur}
+                  ></input>
+                  <textarea
+                    placeholder="Bill From Address"
+                    name="billFromAddress"
+                    id="billFromAddress"
+                    onChange={formikInvoice.handleChange}
+                    value={formikInvoice.values.billFromAddress}
+                    onBlur={formikInvoice.handleBlur}
+                  ></textarea>
                 </div>
                 <div className={classes["bill-to"]}>
-                  <input placeholder="Bill To" type="text"></input>
-                  <textarea placeholder="Bill To Address"></textarea>
+                  <input
+                    placeholder="Bill To"
+                    type="text"
+                    name="billTo"
+                    id="billTo"
+                    onChange={formikInvoice.handleChange}
+                    value={formikInvoice.values.billTo}
+                    onBlur={formikInvoice.handleBlur}
+                  ></input>
+                  <textarea
+                    placeholder="Bill To Address"
+                    name="billToAddress"
+                    id="billToAddress"
+                    onChange={formikInvoice.handleChange}
+                    value={formikInvoice.values.billToAddress}
+                    onBlur={formikInvoice.handleBlur}
+                  ></textarea>
                 </div>
               </div>
               <div className={classes["table-wrapper"]}>
@@ -166,20 +225,33 @@ const AddInvoiceItem = (props) => {
                         <input
                           placeholder="Item Name"
                           className={classes.inputs}
+                          name="itemName"
+                          id="itemName"
+                          onChange={formikInvoice.handleChange}
+                          value={formikInvoice.values.itemName}
+                          onBlur={formikInvoice.handleBlur}
                         ></input>
                       </td>
                       <td>
                         <input
                           placeholder="Unit Costs"
-                          defaultValue="0"
                           className={classes.inputs}
+                          name="unitCosts"
+                          id="unitCosts"
+                          onChange={formikInvoice.handleChange}
+                          value={formikInvoice.values.unitCosts}
+                          onBlur={formikInvoice.handleBlur}
                         ></input>
                       </td>
                       <td>
                         <input
                           placeholder="Unit"
-                          defaultValue="0"
                           className={classes.inputs}
+                          name="unit"
+                          id="unit"
+                          onChange={formikInvoice.handleChange}
+                          value={formikInvoice.values.unit}
+                          onBlur={formikInvoice.handleBlur}
                         ></input>
                       </td>
                       <td>0</td>

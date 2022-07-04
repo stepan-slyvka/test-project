@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { invoiceActions } from "../../store/invoice-slice";
-import { INVOICES } from "../../store/invoice-slice";
+import { INVOICES_LIST } from "../Invoice/Invoices";
 
 import classes from "./AllInvoices.module.css";
 
@@ -12,6 +12,8 @@ import { faTrash, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import AddInvoiceItem from "./AddInvoiceItem";
 
 const AllInvoices = (props) => {
+  const { id } = props;
+
   const dispatch = useDispatch();
 
   const toggleAddInvoices = () => {
@@ -27,7 +29,7 @@ const AllInvoices = (props) => {
   };
 
   const removeInvoiceItem = () => {
-    dispatch(invoiceActions.removeInvoice());
+    dispatch(invoiceActions.removeInvoice({ id }));
   };
 
   const showMoreOptions = useSelector(
@@ -110,9 +112,13 @@ const AllInvoices = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {INVOICES.map((invoice, index) => (
+                      {INVOICES_LIST.map((invoice, index) => (
                         <Fragment key={index}>
-                          <tr className={classes.height} key={index}>
+                          <tr
+                            className={classes.height}
+                            key={index}
+                            id={invoice.id}
+                          >
                             <td>
                               <span className={classes.checkbox}>
                                 <input type="checkbox"></input>

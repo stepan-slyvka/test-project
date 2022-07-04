@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const INVOICES = [
+export const INVOICES_LIST = [
   {
     id: Math.random(),
     number: Math.random().toFixed(2),
@@ -90,18 +90,24 @@ export const ITEMS = [
 const invoiceSlice = createSlice({
   name: "invoice",
   initialState: {
-    invoices: INVOICES,
+    invoices: INVOICES_LIST,
   },
   reducers: {
     addNewInvoice(state, action) {
-      state.invoices.push(action.payload);
+      const newItem = action.payload;
+      state.invoices.push({
+        id: newItem.id,
+        billFrom: newItem.bill_from,
+        billFromAddress: newItem.billFromAddress,
+        billTo: newItem.bill_to,
+        billToAddress: newItem.bill_to_address,
+      });
     },
     removeInvoice(state, action) {
       const id = action.payload;
-      const existingItem = state.invoices.find((item) => item.id === id);
-      if (existingItem) {
-        state.invoices = state.invoices.filter((item) => item.id !== id);
-      }
+      console.log(id);
+      state.invoices = state.invoices.filter((item) => item.id !== id);
+      console.log(action);
     },
     editInvoice() {},
   },

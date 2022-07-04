@@ -1,13 +1,13 @@
 import React from "react";
 
 import { useDispatch } from "react-redux";
-import { INVOICES } from "../../store/invoice-slice";
+import { INVOICES_LIST } from "../../store/invoice-slice";
 import { uiActions } from "../../store/ui-slice";
 import { ITEMS } from "../../store/invoice-slice";
 
-import classes from "./InvoiceItem.module.css";
+import classes from "./InvoiceItemDescription.module.css";
 
-const InvoiceItem = (props) => {
+const InvoiceItemDescription = (props) => {
   const dispatch = useDispatch();
 
   const toggleViewPage = () => {
@@ -38,7 +38,7 @@ const InvoiceItem = (props) => {
                   </button>
                 </div>
               </div>
-              {INVOICES.map((invoice, index) => (
+              {INVOICES_LIST.map((invoice, index) => (
                 <div className={classes.content} key={index}>
                   <div className={classes["invoice-info"]}>
                     <div className={classes.info}>
@@ -157,4 +157,4 @@ const InvoiceItem = (props) => {
   );
 };
 
-export default InvoiceItem;
+export default InvoiceItemDescription;
