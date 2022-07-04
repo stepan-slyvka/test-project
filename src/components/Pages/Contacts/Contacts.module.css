@@ -1,6 +1,6 @@
 /* Desktop */
 .isomorphic-content {
-  padding: 70px 0px 0px 270px;
+  padding: 70px 0px 0px 240px;
   flex-shrink: 0;
   background: rgb(241, 243, 246);
   position: relative;
@@ -249,7 +249,7 @@
 
 /* Shrinked styles */
 .isomorphic-content-shrinked {
-  padding: 70px 0px 0px 110px;
+  padding: 70px 0px 0px 80px;
   flex-shrink: 0;
   background: rgb(241, 243, 246);
   position: relative;

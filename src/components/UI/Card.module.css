@@ -1,0 +1,7 @@
+.content-wrapper {
+  padding: 40px 20px;
+  display: flex;
+  flex-flow: row wrap;
+  overflow: hidden;
+  height: 970px;
+}

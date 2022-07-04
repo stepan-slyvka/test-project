@@ -5,6 +5,8 @@ import ContactInfo from "../Contacts/ContactInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
+import Footer from "../../UI/Footer";
+
 const CONTACTS = [
   {
     id: Math.random(),
@@ -244,9 +246,7 @@ const Contacts = (props) => {
           <div className={classes["contact-info-null"]}></div>
         )}
       </div>
-      <footer className={classes.footer}>
-        Isomorphic @ 2022 Created by RedQ, Inc
-      </footer>
+      <Footer />
     </div>
   );
 };
