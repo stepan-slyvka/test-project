@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 import Layout from "./components/Layout/Layout";
 import SideBar from "./components/SideBar/SideBar";
 import Contacts from "./components/Pages/Contacts/Contacts";
 import Invoices from "./components/Pages/Invoice/Invoices";
 import { Route, Routes } from "react-router-dom";
+import NotFound from "./components/UI/NotFound";
+import Welcome from "./components/UI/Welcome";
 
 function App() {
   const [isShrinked, setIsShrinked] = useState(false);
@@ -14,20 +16,24 @@ function App() {
   };
 
   return (
-    <>
+    <Fragment>
       <SideBar isShrinkedSidebar={isShrinked} />
       <Layout onToggle={toggle} isShrinkedLayout={isShrinked} />
-      <Routes>
-        <Route
-          path="/contacts"
-          element={<Contacts isShrinkedContacts={isShrinked} />}
-        />
-        <Route
-          path="/invoice"
-          element={<Invoices isShrinkedContent={isShrinked} />}
-        />
-      </Routes>
-    </>
+      <main>
+        <Routes>
+          <Route path="" element={<Welcome />} />
+          <Route
+            path="/contacts"
+            element={<Contacts isShrinkedContacts={isShrinked} />}
+          />
+          <Route
+            path="/invoices/*"
+            element={<Invoices isShrinkedContent={isShrinked} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+    </Fragment>
   );
 }
 

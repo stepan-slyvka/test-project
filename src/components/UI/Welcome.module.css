@@ -1,0 +1,25 @@
+.wrapper {
+  align-content: center;
+  margin: 300px 230px 0px 470px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #1e2430;
+}
+
+.wrapper h1 {
+  text-align: center;
+  color: #ff0000;
+  background-color: #fff;
+  padding: 20px 0px;
+  margin: 0;
+  border: 1px solid #adb2af;
+  font-size: 16pt;
+}
+
+.wrapper h3 {
+  text-align: center;
+  color: #fff;
+  font-size: 21pt;
+  padding: 50px;
+  margin: 0;
+}

@@ -311,7 +311,7 @@ const SideBar = (props) => {
                     : classes["menu-list"]
                 }
               >
-                <Link to="/invoice" className={classes.container}>
+                <Link to="/invoices" className={classes.container}>
                   <div
                     className={
                       props.isShrinkedSidebar
