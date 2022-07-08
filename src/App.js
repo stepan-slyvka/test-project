@@ -3,10 +3,10 @@ import React, { useState, Fragment } from "react";
 import Layout from "./components/Layout/Layout";
 import SideBar from "./components/SideBar/SideBar";
 import Contacts from "./components/Pages/Contacts/Contacts";
-import Invoices from "./components/Pages/Invoice/Invoices";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./components/UI/NotFound";
 import Welcome from "./components/UI/Welcome";
+import Invoices from "./components/Pages/Invoice/Invoices";
 
 function App() {
   const [isShrinked, setIsShrinked] = useState(false);

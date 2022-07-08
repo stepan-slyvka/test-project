@@ -20,6 +20,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { invoiceActions } from "../../store/invoice-slice";
+import { Link } from "react-router-dom";
 
 const AddInvoiceItem = (props) => {
   // const {} = props;
@@ -60,15 +61,14 @@ const AddInvoiceItem = (props) => {
     },
     onSubmit: (val) => {
       dispatch(invoiceActions.addNewInvoice(val));
-      dispatch(uiActions.toggleAddInvoice());
     },
   });
 
   const dispatch = useDispatch();
 
-  const toggleAddInvoices = () => {
-    dispatch(uiActions.toggleAddInvoice());
-  };
+  // const toggleAddInvoices = () => {
+  //   dispatch(uiActions.toggleAddInvoice());
+  // };
 
   const toggleMoreOptions = () => {
     dispatch(uiActions.toggleMoreOptions());
@@ -84,14 +84,14 @@ const AddInvoiceItem = (props) => {
         <Card>
           <div className={classes.content}>
             <div className={classes["buttons-wrapper"]}>
-              <button
-                type="button"
-                className={classes["cancel-btn"]}
-                onClick={toggleAddInvoices}
-              >
-                Cancel
-              </button>
-              <Button onClick={addInvoiceHandler}>Save</Button>
+              <Link to="/invoices">
+                <button type="button" className={classes["cancel-btn"]}>
+                  Cancel
+                </button>
+              </Link>
+              <Link to="/invoices">
+                <Button onClick={addInvoiceHandler}>Save</Button>
+              </Link>
             </div>
             <div className={classes["invoice-info-wrapper"]}>
               <div className={classes["invoice-info"]}>
