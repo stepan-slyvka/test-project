@@ -10,25 +10,28 @@ import AllInvoices from "./AllInvoices";
 import AddInvoiceItem from "./AddInvoiceItem";
 import EditInvoiceItem from "./EditInvoiceItem";
 import InvoiceItem from "./InvoiceItem";
-// import { INVOICES_LIST } from "../Invoice/InvoicesList";
+import InvoiceItemDescription from "./InvoiceItemDescription";
+import { INVOICES_LIST } from "../Invoice/InvoicesList";
 
 const Invoices = (props) => {
   // const showViewPage = useSelector((state) => state.ui.viewPageIsVisible);
 
   const params = useParams();
 
-  // const invoice = INVOICES_LIST.find(
-  //   (invoice) => invoice.id === params.invoiceId
-  // );
+  const invoice = INVOICES_LIST.find(
+    (invoice) => invoice.id === params.invoiceId
+  );
 
   return (
     <Fragment>
       <Routes>
         <Route path="/" element={<AllInvoices />} />
-        <Route
-          path={`invoice-description/${params.invoiceId}`}
-          element={<InvoiceItem />}
-        />
+        <Route path={`invoice-description/*`} element={<InvoiceItem />}>
+          <Route
+            path={`${params.invoiceId}`}
+            element={<InvoiceItemDescription />}
+          />
+        </Route>
         <Route path="add-invoice" element={<AddInvoiceItem />} />
         <Route path="edit-invoice" element={<EditInvoiceItem />} />
       </Routes>
