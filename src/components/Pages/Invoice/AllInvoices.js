@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
-import { invoiceActions } from "../../store/invoice-slice";
+// import { invoiceActions } from "../../store/invoice-slice";
 import { INVOICES_LIST } from "../Invoice/InvoicesList";
 
 import Wrapper from "../../UI/Wrapper";
@@ -15,38 +15,27 @@ import classes from "./AllInvoices.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faTrash, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 // import AddInvoiceItem from "./AddInvoiceItem";
 import { Link } from "react-router-dom";
+import Invoice from "./Invoice";
 
 const AllInvoices = (props) => {
   // const { id } = props;
 
   const dispatch = useDispatch();
 
-  const toggleAddInvoices = () => {
-    dispatch(uiActions.toggleAddInvoice());
-  };
-
   const toggleSelectOptions = () => {
     dispatch(uiActions.toggleSelectOptions());
   };
 
-  const toggleViewPage = () => {
-    dispatch(uiActions.toggleViewPage());
-  };
-
-  const removeInvoiceItem = (id) => {
-    dispatch(invoiceActions.removeInvoice(id));
-  };
+  // const removeInvoiceItem = (id) => {
+  //   dispatch(invoiceActions.removeInvoice(id));
+  // };
 
   const showMoreOptions = useSelector(
     (state) => state.ui.selectOptionsIsVisible
   );
-
-  // const showAddInvoice = useSelector(
-  //   (state) => state.ui.addInvoicePageIsVisible
-  // );
 
   return (
     <Fragment>
@@ -54,7 +43,7 @@ const AllInvoices = (props) => {
         <Card>
           <h1 className={classes.header}>Invoice</h1>
           <div className={classes.content}>
-            <div className={classes["btn-wrapper"]} onClick={toggleAddInvoices}>
+            <div className={classes["btn-wrapper"]}>
               <Link to="/invoices/add-invoice">
                 <Button>Add Invoice</Button>
               </Link>
@@ -108,70 +97,16 @@ const AllInvoices = (props) => {
                 </thead>
                 <tbody>
                   {INVOICES_LIST.map((invoice, index) => (
-                    <Fragment key={index}>
-                      <tr
-                        className={classes.height}
-                        key={index}
-                        id={invoice.id}
-                      >
-                        <td>
-                          <span className={classes.checkbox}>
-                            <input type="checkbox"></input>
-                          </span>
-                        </td>
-                        <td>
-                          <span>{invoice.invoice_num}</span>
-                        </td>
-                        <td>
-                          <span>{invoice.bill_from}</span>
-                        </td>
-                        <td>
-                          <span>{invoice.bill_to}</span>
-                        </td>
-                        <td>
-                          <span>14300</span>
-                        </td>
-                        <td>
-                          <span
-                            className={`${
-                              invoice.status === "Pending"
-                                ? classes["status-pending"]
-                                : ""
-                            } ${
-                              invoice.status === "Delivered"
-                                ? classes["status-delivered"]
-                                : ""
-                            } ${
-                              invoice.status === "Shipped"
-                                ? classes["status-shipped"]
-                                : ""
-                            }`}
-                          >
-                            {invoice.status}
-                          </span>
-                        </td>
-                        <td>
-                          <div className={classes.buttons}>
-                            <Link
-                              to={`/invoices/invoice-description/${invoice.id}`}
-                            >
-                              <button
-                                className={classes["view-btn"]}
-                                onClick={toggleViewPage}
-                              >
-                                View
-                              </button>
-                            </Link>
-                            <button
-                              className={classes["delete-btn"]}
-                              onClick={() => removeInvoiceItem(invoice.id)}
-                            >
-                              <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    </Fragment>
+                    <Invoice
+                      key={index}
+                      invoiceItem={{
+                        id: invoice.id,
+                        invoice_num: invoice.invoice_num,
+                        bill_from: invoice.bill_from,
+                        bill_to: invoice.bill_to,
+                        status: invoice.status,
+                      }}
+                    />
                   ))}
                 </tbody>
               </table>

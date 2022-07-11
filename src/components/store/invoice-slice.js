@@ -18,6 +18,7 @@ const invoiceSlice = createSlice({
         billToAddress: newItem.bill_to_address,
         invoiceNumber: newItem.invoice_num,
       });
+      console.log(newItem);
     },
     removeInvoice(state, action) {
       const id = action.payload;

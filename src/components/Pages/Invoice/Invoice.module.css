@@ -1,0 +1,74 @@
+/* Desktop */
+
+.height {
+  height: 69px;
+}
+
+.view-btn {
+  padding: 0px 25px;
+  height: 36px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: rgb(89, 89, 89);
+  background-color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.view-btn:hover {
+  border: 1px solid #6fa8dc;
+  color: #6fa8dc;
+}
+
+.delete-btn {
+  border: 1px transparent;
+  background-color: #fff;
+  color: #e10f0f;
+  padding: 0px 25px;
+  font-weight: 500;
+  height: 36px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+td {
+  border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+  background-color: #f8f8f8;
+}
+
+.status-pending {
+  background-color: #f34841;
+  padding: 3px;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.status-delivered {
+  background-color: #04b15f;
+  padding: 3px;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.status-shipped {
+  background-color: #f0e007;
+  padding: 3px;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.checkbox {
+  margin-left: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}

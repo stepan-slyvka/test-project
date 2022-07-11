@@ -54,13 +54,14 @@ const AddInvoiceItem = (props) => {
       billFromAddress: "",
       billTo: "",
       billToAddress: "",
-      itemName: "",
-      unitCosts: "",
-      unit: "",
-      date: startDate,
+      // itemName: "",
+      // unitCosts: "",
+      // unit: "",
+      // date: startDate,
     },
     onSubmit: (val) => {
       dispatch(invoiceActions.addNewInvoice(val));
+      dispatch(uiActions.toggleAddInvoice());
     },
   });
 
@@ -89,9 +90,15 @@ const AddInvoiceItem = (props) => {
                   Cancel
                 </button>
               </Link>
-              <Link to="/invoices">
-                <Button onClick={addInvoiceHandler}>Save</Button>
-              </Link>
+              {/* <Link to="/invoices"> */}
+              <Button
+                type="submit"
+                className={classes["save-btn"]}
+                onClick={addInvoiceHandler}
+              >
+                Save
+              </Button>
+              {/* </Link> */}
             </div>
             <div className={classes["invoice-info-wrapper"]}>
               <div className={classes["invoice-info"]}>
@@ -250,7 +257,7 @@ const AddInvoiceItem = (props) => {
                 </tbody>
               </table>
               <div className={classes["add-item-btn"]}>
-                <Button>Add Item</Button>
+                <Button type="button">Add Item</Button>
               </div>
               <div className={classes.total}>
                 <p className={classes["sub-total"]}>
