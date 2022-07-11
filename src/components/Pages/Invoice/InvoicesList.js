@@ -1,6 +1,6 @@
 export const INVOICES_LIST = [
   {
-    id: Math.random(),
+    id: Math.random().toString(),
     number: Math.random().toFixed(2),
     invoice_num: "#1232",
     bill_from: "Pineapple Inc.",
@@ -27,7 +27,7 @@ export const INVOICES_LIST = [
     },
   },
   {
-    id: Math.random(),
+    id: Math.random().toString(),
     number: Math.random().toFixed(2),
     invoice_num: "#1232",
     bill_from: "AMD Inc.",
@@ -54,7 +54,7 @@ export const INVOICES_LIST = [
     },
   },
   {
-    id: Math.random(),
+    id: Math.random().toString(),
     number: Math.random().toFixed(2),
     invoice_num: "#1232",
     bill_from: "Apple Inc.",

@@ -16,13 +16,14 @@ const invoiceSlice = createSlice({
         billFromAddress: newItem.billFromAddress,
         billTo: newItem.bill_to,
         billToAddress: newItem.bill_to_address,
+        invoiceNumber: newItem.invoice_num,
       });
     },
     removeInvoice(state, action) {
       const id = action.payload;
-      console.log(id);
       state.invoices = state.invoices.filter((item) => item.id !== id);
       console.log(action);
+      console.log(state.invoices);
     },
     editInvoice() {},
   },

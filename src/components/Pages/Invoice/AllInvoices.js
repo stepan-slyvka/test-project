@@ -20,7 +20,7 @@ import { faTrash, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const AllInvoices = (props) => {
-  const { id } = props;
+  // const { id } = props;
 
   const dispatch = useDispatch();
 
@@ -36,8 +36,8 @@ const AllInvoices = (props) => {
     dispatch(uiActions.toggleViewPage());
   };
 
-  const removeInvoiceItem = () => {
-    dispatch(invoiceActions.removeInvoice({ id }));
+  const removeInvoiceItem = (id) => {
+    dispatch(invoiceActions.removeInvoice(id));
   };
 
   const showMoreOptions = useSelector(
@@ -164,7 +164,7 @@ const AllInvoices = (props) => {
                             </Link>
                             <button
                               className={classes["delete-btn"]}
-                              onClick={removeInvoiceItem}
+                              onClick={() => removeInvoiceItem(invoice.id)}
                             >
                               <FontAwesomeIcon icon={faTrash} />
                             </button>

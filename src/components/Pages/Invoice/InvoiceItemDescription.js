@@ -2,7 +2,7 @@ import React from "react";
 
 // import { useDispatch } from "react-redux";
 // import { uiActions } from "../../store/ui-slice";
-import { INVOICES_LIST } from "../Invoice/InvoicesList";
+// import { INVOICES_LIST } from "../Invoice/InvoicesList";
 
 import Wrapper from "../../UI/Wrapper";
 import Footer from "../../UI/Footer";
