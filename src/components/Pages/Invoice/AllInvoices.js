@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 // import { invoiceActions } from "../../store/invoice-slice";
-import { INVOICES_LIST } from "../Invoice/InvoicesList";
 
 import Wrapper from "../../UI/Wrapper";
 import Card from "../../UI/Card";
@@ -36,6 +35,8 @@ const AllInvoices = (props) => {
   const showMoreOptions = useSelector(
     (state) => state.ui.selectOptionsIsVisible
   );
+
+  const invoiceList = useSelector((state) => state.invoice.invoices);
 
   return (
     <Fragment>
@@ -96,7 +97,7 @@ const AllInvoices = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {INVOICES_LIST.map((invoice, index) => (
+                  {invoiceList.map((invoice, index) => (
                     <Invoice
                       key={index}
                       invoiceItem={{
