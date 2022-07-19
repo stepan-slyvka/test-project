@@ -17,14 +17,22 @@ const invoiceSlice = createSlice({
         billTo: newItem.bill_to,
         billToAddress: newItem.bill_to_address,
         invoiceNumber: newItem.invoice_num,
+        status: newItem.status,
+        order_date: newItem.order_date,
+        ITEMS: [
+          {
+            id: Math.random(),
+            item_name: newItem.item_name,
+            unit_costs: newItem.unit_costs,
+            units: newItem.units,
+          },
+        ],
       });
       console.log(newItem);
     },
     removeInvoice(state, action) {
       const id = action.payload;
       state.invoices = state.invoices.filter((item) => item.id !== id);
-      console.log(action);
-      console.log(state.invoices);
     },
     editInvoice() {},
   },

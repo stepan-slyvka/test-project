@@ -69,7 +69,7 @@
   border-color: rgb(44, 110, 243);
 }
 
-/* .save-btn {
+.save-btn {
   cursor: pointer;
   background-color: rgb(68, 130, 255);
   color: #fff;
@@ -83,7 +83,7 @@
 
 .save-btn:hover {
   background-color: rgb(44, 110, 243);
-} */
+}
 
 .invoice-info-wrapper {
   width: 100%;
@@ -459,6 +459,10 @@ thead {
   border-radius: 3px;
   font-size: 12pt;
   font-weight: 500;
+}
+
+.add-item-btn button:hover {
+  background-color: rgb(44, 110, 243);
 }
 
 .total {

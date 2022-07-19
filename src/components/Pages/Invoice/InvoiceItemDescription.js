@@ -1,9 +1,5 @@
 import React from "react";
 
-// import { useDispatch } from "react-redux";
-// import { uiActions } from "../../store/ui-slice";
-// import { INVOICES_LIST } from "../Invoice/InvoicesList";
-
 import Wrapper from "../../UI/Wrapper";
 import Footer from "../../UI/Footer";
 
@@ -11,12 +7,6 @@ import classes from "./InvoiceItemDescription.module.css";
 import { Link } from "react-router-dom";
 
 const InvoiceItemDescription = (props) => {
-  // const dispatch = useDispatch();
-
-  // const toggleViewPage = () => {
-  //   dispatch(uiActions.toggleViewPage());
-  // };
-
   let counter = 1;
 
   return (

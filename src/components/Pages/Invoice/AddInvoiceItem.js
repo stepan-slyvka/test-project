@@ -25,10 +25,15 @@ import { Link } from "react-router-dom";
 const AddInvoiceItem = (props) => {
   // const {} = props;
 
+  const date = new Date();
+
   const options = ["Pending", "Shipped", "Delivered"];
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState("Pending");
+  const inputs = [{ itemName: "", unitCosts: "", unit: "" }];
+
+  const [startDate, setStartDate] = useState(date);
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [listItems, setListItems] = useState(inputs);
 
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
@@ -36,13 +41,26 @@ const AddInvoiceItem = (props) => {
   };
 
   const addInvoiceHandler = (invoice) => {
+    console.log(invoice);
+    console.log(selectedOption);
     dispatch(
       invoiceActions.addNewInvoice({
-        invoiceNumber: invoice.number,
-        billFrom: invoice.bill_from,
-        billFromAddress: invoice.bill_from_address,
-        billTo: invoice.bill_to,
-        billToAddress: invoice.bill_to_address,
+        id: Math.random(),
+        invoiceNumber: invoice.invoiceNumber,
+        billFrom: invoice.billFrom,
+        billFromAddress: invoice.billFromAddress,
+        billTo: invoice.billTo,
+        billToAddress: invoice.billToAddress,
+        status: selectedOption,
+        order_date: startDate.toJSON(),
+        ITEMS: [
+          {
+            id: Math.random(),
+            item_name: invoice.itemName,
+            unit_costs: invoice.unitCosts,
+            units: invoice.unit,
+          },
+        ],
       })
     );
   };
@@ -54,22 +72,23 @@ const AddInvoiceItem = (props) => {
       billFromAddress: "",
       billTo: "",
       billToAddress: "",
-      // itemName: "",
-      // unitCosts: "",
-      // unit: "",
-      // date: startDate,
+      status: selectedOption,
+      date: startDate.toJSON(),
+      ITEMS: [
+        {
+          id: Math.random(),
+          itemName: "",
+          unitCosts: "",
+          unit: "",
+        },
+      ],
     },
     onSubmit: (val) => {
-      dispatch(invoiceActions.addNewInvoice(val));
-      dispatch(uiActions.toggleAddInvoice());
+      addInvoiceHandler(val);
     },
   });
 
   const dispatch = useDispatch();
-
-  // const toggleAddInvoices = () => {
-  //   dispatch(uiActions.toggleAddInvoice());
-  // };
 
   const toggleMoreOptions = () => {
     dispatch(uiActions.toggleMoreOptions());
@@ -78,6 +97,12 @@ const AddInvoiceItem = (props) => {
   const showOtherOptions = useSelector(
     (state) => state.ui.selectMoreOptionsIsVisible
   );
+
+  let counter = 1;
+
+  const addItemHandler = () => {
+    setListItems(listItems.concat([{ itemName: "", unitCosts: "", unit: "" }]));
+  };
 
   return (
     <form onSubmit={formikInvoice.handleSubmit}>
@@ -91,13 +116,7 @@ const AddInvoiceItem = (props) => {
                 </button>
               </Link>
               {/* <Link to="/invoices"> */}
-              <Button
-                type="submit"
-                className={classes["save-btn"]}
-                onClick={addInvoiceHandler}
-              >
-                Save
-              </Button>
+              <Button className={classes["save-btn"]}>Save</Button>
               {/* </Link> */}
             </div>
             <div className={classes["invoice-info-wrapper"]}>
@@ -216,53 +235,63 @@ const AddInvoiceItem = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className={classes["more-padding"]}>1</td>
-                    <td>
-                      <input
-                        placeholder="Item Name"
-                        className={classes.inputs}
-                        name="itemName"
-                        id="itemName"
-                        onChange={formikInvoice.handleChange}
-                        value={formikInvoice.values.itemName}
-                        onBlur={formikInvoice.handleBlur}
-                      ></input>
-                    </td>
-                    <td>
-                      <input
-                        placeholder="Unit Costs"
-                        className={classes.inputs}
-                        name="unitCosts"
-                        id="unitCosts"
-                        onChange={formikInvoice.handleChange}
-                        value={formikInvoice.values.unitCosts}
-                        onBlur={formikInvoice.handleBlur}
-                      ></input>
-                    </td>
-                    <td>
-                      <input
-                        placeholder="Unit"
-                        className={classes.inputs}
-                        name="unit"
-                        id="unit"
-                        onChange={formikInvoice.handleChange}
-                        value={formikInvoice.values.unit}
-                        onBlur={formikInvoice.handleBlur}
-                      ></input>
-                    </td>
-                    <td>0</td>
-                    <td></td>
-                  </tr>
+                  {listItems.map((item, index) => (
+                    <tr key={index}>
+                      <td className={classes["more-padding"]}>{counter++}</td>
+                      <td>
+                        <input
+                          placeholder="Item Name"
+                          className={classes.inputs}
+                          name="itemName"
+                          id="itemName"
+                          onChange={formikInvoice.handleChange}
+                          value={formikInvoice.values.item_name}
+                          onBlur={formikInvoice.handleBlur}
+                        ></input>
+                      </td>
+                      <td>
+                        <input
+                          placeholder="Unit Costs"
+                          className={classes.inputs}
+                          name="unitCosts"
+                          id="unitCosts"
+                          onChange={formikInvoice.handleChange}
+                          value={formikInvoice.values.unit_costs}
+                          onBlur={formikInvoice.handleBlur}
+                        ></input>
+                      </td>
+                      <td>
+                        <input
+                          placeholder="Unit"
+                          className={classes.inputs}
+                          name="unit"
+                          id="unit"
+                          onChange={formikInvoice.handleChange}
+                          value={formikInvoice.values.units}
+                          onBlur={formikInvoice.handleBlur}
+                        ></input>
+                      </td>
+                      <td>0</td>
+                      <td></td>
+                      {/* There should be dynamic values later */}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
               <div className={classes["add-item-btn"]}>
-                <Button type="button">Add Item</Button>
+                <button
+                  onClick={addItemHandler}
+                  type="button"
+                  className={classes["add-item-btn"]}
+                >
+                  Add Item
+                </button>
               </div>
               <div className={classes.total}>
                 <p className={classes["sub-total"]}>
                   <span>Sub Total: </span>
                   <span>$0</span>
+                  {/* Dynamic value later here */}
                 </p>
                 <div className={classes["total-vat"]}>
                   <span>Total Vat:</span>
@@ -272,6 +301,7 @@ const AddInvoiceItem = (props) => {
                       <span>%</span>
                     </span>
                     <span className={classes.sum}>$0</span>
+                    {/* Dynamic value later here */}
                   </div>
                 </div>
                 <div className={classes["grand-total"]}>
@@ -279,6 +309,7 @@ const AddInvoiceItem = (props) => {
                   <div className={classes.input}>
                     <input type="text" defaultValue="$"></input>
                     <span>0</span>
+                    {/* Dynamic value later here */}
                   </div>
                 </div>
               </div>

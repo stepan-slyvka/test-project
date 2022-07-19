@@ -1,36 +1,26 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
-// import { invoiceActions } from "../../store/invoice-slice";
+import { Link } from "react-router-dom";
 
+import Invoice from "./Invoice";
 import Wrapper from "../../UI/Wrapper";
 import Card from "../../UI/Card";
 import Footer from "../../UI/Footer";
 import Button from "../../UI/Button";
-// import InvoiceItemDescription from "./InvoiceItemDescription";
-// import EditInvoiceItem from "./EditInvoiceItem";
 
 import classes from "./AllInvoices.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-// import AddInvoiceItem from "./AddInvoiceItem";
-import { Link } from "react-router-dom";
-import Invoice from "./Invoice";
 
 const AllInvoices = (props) => {
-  // const { id } = props;
-
   const dispatch = useDispatch();
 
   const toggleSelectOptions = () => {
     dispatch(uiActions.toggleSelectOptions());
   };
-
-  // const removeInvoiceItem = (id) => {
-  //   dispatch(invoiceActions.removeInvoice(id));
-  // };
 
   const showMoreOptions = useSelector(
     (state) => state.ui.selectOptionsIsVisible
