@@ -13,20 +13,13 @@ const invoiceSlice = createSlice({
       state.invoices.push({
         id: newItem.id,
         billFrom: newItem.bill_from,
-        billFromAddress: newItem.billFromAddress,
+        billFromAddress: newItem.bill_from_address,
         billTo: newItem.bill_to,
         billToAddress: newItem.bill_to_address,
         invoiceNumber: newItem.invoice_num,
         status: newItem.status,
         order_date: newItem.order_date,
-        ITEMS: [
-          {
-            id: Math.random(),
-            item_name: newItem.item_name,
-            unit_costs: newItem.unit_costs,
-            units: newItem.units,
-          },
-        ],
+        ITEMS: [...newItem.ITEMS],
       });
       console.log(newItem);
     },

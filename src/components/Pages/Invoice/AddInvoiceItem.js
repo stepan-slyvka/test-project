@@ -20,16 +20,16 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { invoiceActions } from "../../store/invoice-slice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AddInvoiceItem = (props) => {
-  // const {} = props;
+  const navigate = useNavigate();
 
   const date = new Date();
 
   const options = ["Pending", "Shipped", "Delivered"];
 
-  const inputs = [{ itemName: "", unitCosts: "", unit: "" }];
+  const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
   const [startDate, setStartDate] = useState(date);
   const [selectedOption, setSelectedOption] = useState(options[0]);
@@ -53,14 +53,7 @@ const AddInvoiceItem = (props) => {
         billToAddress: invoice.billToAddress,
         status: selectedOption,
         order_date: startDate.toJSON(),
-        ITEMS: [
-          {
-            id: Math.random(),
-            item_name: invoice.itemName,
-            unit_costs: invoice.unitCosts,
-            units: invoice.unit,
-          },
-        ],
+        ITEMS: [...updateValuesOnSubmit()],
       })
     );
   };
@@ -74,17 +67,11 @@ const AddInvoiceItem = (props) => {
       billToAddress: "",
       status: selectedOption,
       date: startDate.toJSON(),
-      ITEMS: [
-        {
-          id: Math.random(),
-          itemName: "",
-          unitCosts: "",
-          unit: "",
-        },
-      ],
+      ITEMS: [],
     },
     onSubmit: (val) => {
       addInvoiceHandler(val);
+      navigate("/invoices", { replace: true });
     },
   });
 
@@ -101,7 +88,15 @@ const AddInvoiceItem = (props) => {
   let counter = 1;
 
   const addItemHandler = () => {
-    setListItems(listItems.concat([{ itemName: "", unitCosts: "", unit: "" }]));
+    setListItems(listItems.concat({ item_name: "", unit_costs: "", unit: "" }));
+  };
+
+  const updateItemHandler = (index, inputName, value) => {
+    listItems[index] = { ...listItems[index], [inputName]: value };
+  };
+
+  const updateValuesOnSubmit = () => {
+    return listItems;
   };
 
   return (
@@ -115,9 +110,7 @@ const AddInvoiceItem = (props) => {
                   Cancel
                 </button>
               </Link>
-              {/* <Link to="/invoices"> */}
-              <Button className={classes["save-btn"]}>Save</Button>
-              {/* </Link> */}
+              <Button>Save</Button>
             </div>
             <div className={classes["invoice-info-wrapper"]}>
               <div className={classes["invoice-info"]}>
@@ -244,7 +237,13 @@ const AddInvoiceItem = (props) => {
                           className={classes.inputs}
                           name="itemName"
                           id="itemName"
-                          onChange={formikInvoice.handleChange}
+                          onChange={(e) =>
+                            updateItemHandler(
+                              index,
+                              "item_name",
+                              e.currentTarget.value
+                            )
+                          }
                           value={formikInvoice.values.item_name}
                           onBlur={formikInvoice.handleBlur}
                         ></input>
@@ -255,7 +254,13 @@ const AddInvoiceItem = (props) => {
                           className={classes.inputs}
                           name="unitCosts"
                           id="unitCosts"
-                          onChange={formikInvoice.handleChange}
+                          onChange={(e) =>
+                            updateItemHandler(
+                              index,
+                              "unit_costs",
+                              e.currentTarget.value
+                            )
+                          }
                           value={formikInvoice.values.unit_costs}
                           onBlur={formikInvoice.handleBlur}
                         ></input>
@@ -266,7 +271,13 @@ const AddInvoiceItem = (props) => {
                           className={classes.inputs}
                           name="unit"
                           id="unit"
-                          onChange={formikInvoice.handleChange}
+                          onChange={(e) =>
+                            updateItemHandler(
+                              index,
+                              "unit",
+                              e.currentTarget.value
+                            )
+                          }
                           value={formikInvoice.values.units}
                           onBlur={formikInvoice.handleBlur}
                         ></input>
