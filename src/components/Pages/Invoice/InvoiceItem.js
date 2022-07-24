@@ -9,15 +9,13 @@ import { INVOICES_LIST } from "./InvoicesList";
 import classes from "../Invoice/InvoiceItem.module.css";
 
 const InvoiceItem = () => {
-  const params = useParams();
+  const { invoiceId } = useParams();
 
-  const invoice = INVOICES_LIST.find(
-    (invoice) => invoice.id === params.invoiceId
-  );
+  const invoice = INVOICES_LIST.find((invoice) => invoice.id === invoiceId);
 
   return invoice ? (
     <InvoiceItemDescription
-      invoiceNumber={invoice.invoice_num}
+      invoice_num={invoice.invoice_num}
       status={invoice.status}
       order_date={invoice.order_date}
       bill_from={invoice.bill_from}
