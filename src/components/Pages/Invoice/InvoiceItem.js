@@ -6,6 +6,8 @@ import InvoiceItemDescription from "../Invoice/InvoiceItemDescription";
 
 import { INVOICES_LIST } from "./InvoicesList";
 
+import classes from "../Invoice/InvoiceItem.module.css";
+
 const InvoiceItem = () => {
   const params = useParams();
 
@@ -13,9 +15,9 @@ const InvoiceItem = () => {
     (invoice) => invoice.id === params.invoiceId
   );
 
-  return (
+  return invoice ? (
     <InvoiceItemDescription
-      invoice_num={invoice.invoice_num}
+      invoiceNumber={invoice.invoice_num}
       status={invoice.status}
       order_date={invoice.order_date}
       bill_from={invoice.bill_from}
@@ -33,6 +35,8 @@ const InvoiceItem = () => {
       unit={invoice.ITEMS.unit}
       price={invoice.ITEMS.price}
     />
+  ) : (
+    <div className={classes.centered}>No Invoices Found.</div>
   );
 };
 

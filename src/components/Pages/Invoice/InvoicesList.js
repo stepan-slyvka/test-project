@@ -1,7 +1,7 @@
 export const INVOICES_LIST = [
   {
-    id: Math.random().toString(),
-    number: Math.random().toFixed(2),
+    id: "09u34otiuhnrfgp9ioj45",
+    // number: Math.random().toFixed(2),
     invoice_num: "#1232",
     bill_from: "Pineapple Inc.",
     bill_to: "REDQ Inc.",
@@ -29,8 +29,8 @@ export const INVOICES_LIST = [
     ],
   },
   {
-    id: Math.random().toString(),
-    number: Math.random().toFixed(2),
+    id: "234098ujh43gikoljaerpgiojaerg",
+    // number: Math.random().toFixed(2),
     invoice_num: "#1232",
     bill_from: "AMD Inc.",
     bill_to: "Intel Inc.",
@@ -58,8 +58,8 @@ export const INVOICES_LIST = [
     ],
   },
   {
-    id: Math.random().toString(),
-    number: Math.random().toFixed(2),
+    id: "0934tpinr-9ujw3ensdsf",
+    // number: Math.random().toFixed(2),
     invoice_num: "#1232",
     bill_from: "Apple Inc.",
     bill_to: "Samsung",

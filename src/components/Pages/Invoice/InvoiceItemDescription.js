@@ -4,6 +4,7 @@ import Wrapper from "../../UI/Wrapper";
 import Footer from "../../UI/Footer";
 
 import classes from "./InvoiceItemDescription.module.css";
+
 import { Link } from "react-router-dom";
 
 const InvoiceItemDescription = (props) => {
@@ -32,7 +33,7 @@ const InvoiceItemDescription = (props) => {
               <div className={classes["invoice-info"]}>
                 <div className={classes.info}>
                   <h3>Invoice Info</h3>
-                  <span>{props.invoice_num}</span>
+                  <span>{props.invoiceNumber}</span>
                 </div>
                 <div className={classes.order}>
                   <p>

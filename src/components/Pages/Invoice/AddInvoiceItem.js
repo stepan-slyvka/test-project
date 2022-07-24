@@ -15,6 +15,8 @@ import Button from "../../UI/Button";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
@@ -45,7 +47,7 @@ const AddInvoiceItem = (props) => {
     console.log(selectedOption);
     dispatch(
       invoiceActions.addNewInvoice({
-        id: Math.random(),
+        id: uuidv4(),
         invoiceNumber: invoice.invoiceNumber,
         billFrom: invoice.billFrom,
         billFromAddress: invoice.billFromAddress,
@@ -67,7 +69,6 @@ const AddInvoiceItem = (props) => {
       billToAddress: "",
       status: selectedOption,
       date: startDate.toJSON(),
-      ITEMS: [],
     },
     onSubmit: (val) => {
       addInvoiceHandler(val);

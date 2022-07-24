@@ -21,7 +21,7 @@ const Invoice = (props) => {
   };
 
   return (
-    <tr className={classes.height}>
+    <tr className={classes.height} key={id}>
       <td>
         <span className={classes.checkbox}>
           <input type="checkbox"></input>
