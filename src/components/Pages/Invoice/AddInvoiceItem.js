@@ -54,7 +54,7 @@ const AddInvoiceItem = (props) => {
         billTo: invoice.billTo,
         billToAddress: invoice.billToAddress,
         status: selectedOption,
-        order_date: startDate.toJSON(),
+        order_date: startDate.toLocaleDateString(),
         ITEMS: [...updateValuesOnSubmit()],
       })
     );
@@ -62,13 +62,11 @@ const AddInvoiceItem = (props) => {
 
   const formikInvoice = useFormik({
     initialValues: {
-      invoiceNumber: "",
+      invoiceNumber: "#",
       billFrom: "",
       billFromAddress: "",
       billTo: "",
       billToAddress: "",
-      status: selectedOption,
-      date: startDate.toJSON(),
     },
     onSubmit: (val) => {
       addInvoiceHandler(val);
@@ -132,11 +130,8 @@ const AddInvoiceItem = (props) => {
                   <div className={classes.buttons}>
                     {showOtherOptions && (
                       <ul className={classes.options}>
-                        {options.map((option) => (
-                          <li
-                            onClick={optionClickHandler(option)}
-                            key={Math.random()}
-                          >
+                        {options.map((option, index) => (
+                          <li onClick={optionClickHandler(option)} key={index}>
                             {option}
                           </li>
                         ))}

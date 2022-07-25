@@ -98,13 +98,15 @@ const InvoiceItemDescription = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>{counter++}</td>
-                      <td>{props.item_name}</td>
-                      <td>{props.unit_costs}</td>
-                      <td>{props.unit}</td>
-                      <td>{props.price}</td>
-                    </tr>
+                    {props.items.map((item, index) => (
+                      <tr key={index}>
+                        <td>{counter++}</td>
+                        <td>{item.item_name}</td>
+                        <td>{item.unit_costs}</td>
+                        <td>{item.unit}</td>
+                        <td>{item.price}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

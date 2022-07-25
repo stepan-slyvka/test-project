@@ -6,6 +6,7 @@ import classes from "../Invoice/InvoiceItem.module.css";
 
 const InvoiceItem = () => {
   const { invoiceId } = useParams();
+
   const invoices = useSelector((state) => state.invoice.invoices);
 
   const invoice = invoices.find((invoice) => invoice.id === invoiceId);
@@ -25,10 +26,7 @@ const InvoiceItem = () => {
       bill_to_email={invoice.bill_to_email}
       bill_to_fax={invoice.bill_to_fax}
       bill_to_phone={invoice.bill_to_phone}
-      item_name={invoice.ITEMS.item_name}
-      unit_costs={invoice.ITEMS.unit_costs}
-      unit={invoice.ITEMS.unit}
-      price={invoice.ITEMS.price}
+      items={invoice.ITEMS}
     />
   ) : (
     <div className={classes.centered}>No Invoices Found.</div>
