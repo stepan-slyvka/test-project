@@ -20,7 +20,7 @@ const invoiceSlice = createSlice({
         bill_to_address: newItem.billToAddress,
         invoice_num: newItem.invoiceNumber,
         status: newItem.status,
-        order_date: newItem.date,
+        order_date: newItem.order_date,
         ITEMS: [...newItem.ITEMS],
       });
       console.log(newItem);
