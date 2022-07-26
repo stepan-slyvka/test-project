@@ -7,7 +7,11 @@ import classes from "./InvoiceItemDescription.module.css";
 
 import { Link } from "react-router-dom";
 
+import { useParams } from "react-router-dom";
+
 const InvoiceItemDescription = (props) => {
+  const { invoiceId } = useParams();
+
   let counter = 1;
 
   return (
@@ -22,7 +26,7 @@ const InvoiceItemDescription = (props) => {
                     Go To Invoices
                   </button>
                 </Link>
-                <Link to="/invoices/edit-invoice">
+                <Link to={`/invoices/edit-invoice/${invoiceId}`}>
                   <button type="button" className={classes["edit-invoice"]}>
                     Edit Invoice
                   </button>

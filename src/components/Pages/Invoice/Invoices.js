@@ -9,6 +9,7 @@ import AddInvoiceItem from "./AddInvoiceItem";
 import EditInvoiceItem from "./EditInvoiceItem";
 import InvoiceItem from "./InvoiceItem";
 import InvoiceItemDescription from "./InvoiceItemDescription";
+import EditInvoice from "./EditInvoice";
 
 const Invoices = () => {
   const params = useParams();
@@ -27,7 +28,9 @@ const Invoices = () => {
           />
         </Route>
         <Route path="add-invoice" element={<AddInvoiceItem />} />
-        <Route path="edit-invoice" element={<EditInvoiceItem />} />
+        <Route path={`edit-invoice/:invoiceId`} element={<EditInvoice />}>
+          <Route path={`${params.invoiceId}`} element={<EditInvoiceItem />} />
+        </Route>
       </Routes>
     </Fragment>
   );

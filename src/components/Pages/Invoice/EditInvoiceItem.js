@@ -20,7 +20,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { invoiceActions } from "../../store/invoice-slice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EditInvoiceItem = (props) => {
   const navigate = useNavigate();
@@ -58,18 +58,18 @@ const EditInvoiceItem = (props) => {
     );
   };
 
-  const formikInvoice = useFormik({
+  const formikEditInvoice = useFormik({
     initialValues: {
-      invoiceNumber: "",
-      billFrom: "",
-      billFromAddress: "",
-      billTo: "",
-      billToAddress: "",
-      status: "",
-      order_date: "",
-      item_name: "",
-      unit_costs: "",
-      units: "",
+      invoiceNumber: props.invoiceNumber,
+      billFrom: props.billFrom,
+      billFromAddress: props.billFromAddress,
+      billTo: props.billTo,
+      billToAddress: props.billToAddress,
+      status: props.status,
+      order_date: props.orderDate,
+      item_name: props.itemName,
+      unit_costs: props.unitCosts,
+      units: props.units,
     },
     onSubmit: (val) => {
       editInvoiceHandler(val);
@@ -101,17 +101,23 @@ const EditInvoiceItem = (props) => {
     return listItems;
   };
 
+  const navigateBack = () => {
+    navigate(-1);
+  };
+
   return (
-    <form onSubmit={formikInvoice.handleSubmit}>
+    <form onSubmit={formikEditInvoice.handleSubmit}>
       <Wrapper isShrinked={props.isShrinked}>
         <Card>
           <div className={classes.content}>
             <div className={classes["buttons-wrapper"]}>
-              <Link to="/invoices">
-                <button type="button" className={classes["cancel-btn"]}>
-                  Cancel
-                </button>
-              </Link>
+              <button
+                type="button"
+                className={classes["cancel-btn"]}
+                onClick={navigateBack}
+              >
+                Cancel
+              </button>
               <Button>Save</Button>
             </div>
             <div className={classes["invoice-info-wrapper"]}>
@@ -122,9 +128,9 @@ const EditInvoiceItem = (props) => {
                   type="text"
                   name="invoiceNumber"
                   id="invoiceNumber"
-                  onChange={formikInvoice.handleChange}
-                  value={formikInvoice.values.invoiceNumber}
-                  onBlur={formikInvoice.handleBlur}
+                  onChange={formikEditInvoice.handleChange}
+                  value={formikEditInvoice.values.invoiceNumber}
+                  onBlur={formikEditInvoice.handleBlur}
                 ></input>
               </div>
               <div className={classes["right-side-column"]}>
@@ -173,17 +179,17 @@ const EditInvoiceItem = (props) => {
                   type="text"
                   name="billFrom"
                   id="billFrom"
-                  onChange={formikInvoice.handleChange}
-                  value={formikInvoice.values.billFrom}
-                  onBlur={formikInvoice.handleBlur}
+                  onChange={formikEditInvoice.handleChange}
+                  value={formikEditInvoice.values.billFrom}
+                  onBlur={formikEditInvoice.handleBlur}
                 ></input>
                 <textarea
                   placeholder="Bill From Address"
                   name="billFromAddress"
                   id="billFromAddress"
-                  onChange={formikInvoice.handleChange}
-                  value={formikInvoice.values.billFromAddress}
-                  onBlur={formikInvoice.handleBlur}
+                  onChange={formikEditInvoice.handleChange}
+                  value={formikEditInvoice.values.billFromAddress}
+                  onBlur={formikEditInvoice.handleBlur}
                 ></textarea>
               </div>
               <div className={classes["bill-to"]}>
@@ -192,17 +198,17 @@ const EditInvoiceItem = (props) => {
                   type="text"
                   name="billTo"
                   id="billTo"
-                  onChange={formikInvoice.handleChange}
-                  value={formikInvoice.values.billTo}
-                  onBlur={formikInvoice.handleBlur}
+                  onChange={formikEditInvoice.handleChange}
+                  value={formikEditInvoice.values.billTo}
+                  onBlur={formikEditInvoice.handleBlur}
                 ></input>
                 <textarea
                   placeholder="Bill To Address"
                   name="billToAddress"
                   id="billToAddress"
-                  onChange={formikInvoice.handleChange}
-                  value={formikInvoice.values.billToAddress}
-                  onBlur={formikInvoice.handleBlur}
+                  onChange={formikEditInvoice.handleChange}
+                  value={formikEditInvoice.values.billToAddress}
+                  onBlur={formikEditInvoice.handleBlur}
                 ></textarea>
               </div>
             </div>
@@ -243,8 +249,8 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikInvoice.values.item_name}
-                          onBlur={formikInvoice.handleBlur}
+                          value={formikEditInvoice.values.item_name}
+                          onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
                       <td>
@@ -260,8 +266,8 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikInvoice.values.unit_costs}
-                          onBlur={formikInvoice.handleBlur}
+                          value={formikEditInvoice.values.unit_costs}
+                          onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
                       <td>
@@ -277,8 +283,8 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikInvoice.values.units}
-                          onBlur={formikInvoice.handleBlur}
+                          value={formikEditInvoice.values.units}
+                          onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
                       <td>0</td>
