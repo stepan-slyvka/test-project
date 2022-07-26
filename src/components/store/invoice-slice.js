@@ -29,7 +29,25 @@ const invoiceSlice = createSlice({
       const id = action.payload;
       state.invoices = state.invoices.filter((item) => item.id !== id);
     },
-    editInvoice() {},
+    editInvoice(state) {
+      const existingItem = state.invoices;
+      existingItem.map((item) => {
+        if (existingItem === item) {
+          return {
+            id: item.id,
+            bill_from: item.billFrom,
+            bill_from_address: item.billFromAddress,
+            bill_to: item.billTo,
+            bill_to_address: item.billToAddress,
+            invoice_num: item.invoiceNumber,
+            status: item.status,
+            order_date: item.order_date,
+            ITEMS: [...item.ITEMS],
+          };
+        }
+        return item;
+      });
+    },
   },
 });
 
