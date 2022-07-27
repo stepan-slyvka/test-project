@@ -40,6 +40,8 @@ const EditInvoiceItem = (props) => {
 
   // console.log(props.orderDate.toJSON());
 
+  console.log(props.items);
+
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
     dispatch(uiActions.toggleMoreOptions());
