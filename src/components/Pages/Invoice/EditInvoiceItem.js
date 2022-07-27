@@ -32,9 +32,12 @@ const EditInvoiceItem = (props) => {
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
   const [startDate, setStartDate] = useState(date);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
-  const [listItems, setListItems] = useState(inputs);
+  // const [startDate, setStartDate] = useState(props.orderDate.toLocaleDateString() || date);
+  const [selectedOption, setSelectedOption] = useState(props.status || options[0]);
+  const [listItems, setListItems] = useState(props.items || inputs);
 
+  console.log(props.items);
+  
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
     dispatch(uiActions.toggleMoreOptions());
@@ -234,7 +237,7 @@ const EditInvoiceItem = (props) => {
                 </thead>
                 <tbody>
                   {listItems.map((item, index) => (
-                    <tr key={index}>
+                    <tr data-1={item} key={index}>
                       <td className={classes["more-padding"]}>{counter++}</td>
                       <td>
                         <input
@@ -249,7 +252,7 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikEditInvoice.values.item_name}
+                          value={item.item_name}
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
@@ -266,7 +269,7 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikEditInvoice.values.unit_costs}
+                          value={item.unit_costs}
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
@@ -283,7 +286,7 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikEditInvoice.values.units}
+                          value={item.units}
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>

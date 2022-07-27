@@ -23,6 +23,7 @@ const EditInvoice = () => {
       billToAddress={invoice.bill_to_address}
       status={invoice.status}
       orderDate={invoice.order_date}
+			items={invoice.ITEMS}
       itemName={invoice.item_name}
       unitCosts={invoice.unit_costs}
       units={invoice.units}
