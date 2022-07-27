@@ -32,8 +32,13 @@ const EditInvoiceItem = (props) => {
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
   const [startDate, setStartDate] = useState(date);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
-  const [listItems, setListItems] = useState(inputs);
+  // const [startDate, setStartDate] = useState(props.orderDate || date);
+  const [selectedOption, setSelectedOption] = useState(
+    props.status || options[0]
+  );
+  const [listItems, setListItems] = useState(props.items || inputs);
+
+  // console.log(props.orderDate.toJSON());
 
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
@@ -49,8 +54,14 @@ const EditInvoiceItem = (props) => {
         invoiceNumber: invoice.invoiceNumber,
         billFrom: invoice.billFrom,
         billFromAddress: invoice.billFromAddress,
+        billFromEmail: invoice.billFromEmail,
+        billFromPhone: invoice.billFromPhone,
+        billFromFax: invoice.billFromFax,
         billTo: invoice.billTo,
         billToAddress: invoice.billToAddress,
+        billToPhone: invoice.billToPhone,
+        billToEmail: invoice.billToEmail,
+        billToFax: invoice.billToFax,
         status: selectedOption,
         order_date: startDate.toLocaleDateString(),
         ITEMS: [...updateValuesOnSubmit()],
@@ -63,8 +74,16 @@ const EditInvoiceItem = (props) => {
       invoiceNumber: props.invoiceNumber,
       billFrom: props.billFrom,
       billFromAddress: props.billFromAddress,
+      billFromEmail: props.billFromEmail,
+      billFromPhone: props.billFromPhone,
+      billFromFax: props.billFromFax,
+      billFromInfo: props.billFromInfo,
       billTo: props.billTo,
       billToAddress: props.billToAddress,
+      billToPhone: props.billToPhone,
+      billToEmail: props.billToEmail,
+      billToFax: props.billToFax,
+      billToInfo: props.billToInfo,
       status: props.status,
       order_date: props.orderDate,
       item_name: props.itemName,
@@ -184,11 +203,11 @@ const EditInvoiceItem = (props) => {
                   onBlur={formikEditInvoice.handleBlur}
                 ></input>
                 <textarea
-                  placeholder="Bill From Address"
-                  name="billFromAddress"
-                  id="billFromAddress"
+                  placeholder="Bill From Info"
+                  name="billFromInfo"
+                  id="billFromInfo"
                   onChange={formikEditInvoice.handleChange}
-                  value={formikEditInvoice.values.billFromAddress}
+                  value={formikEditInvoice.values.billFromInfo}
                   onBlur={formikEditInvoice.handleBlur}
                 ></textarea>
               </div>
@@ -203,11 +222,11 @@ const EditInvoiceItem = (props) => {
                   onBlur={formikEditInvoice.handleBlur}
                 ></input>
                 <textarea
-                  placeholder="Bill To Address"
-                  name="billToAddress"
-                  id="billToAddress"
+                  placeholder="Bill To Info"
+                  name="billToInfo"
+                  id="billToInfo"
                   onChange={formikEditInvoice.handleChange}
-                  value={formikEditInvoice.values.billToAddress}
+                  value={formikEditInvoice.values.billToInfo}
                   onBlur={formikEditInvoice.handleBlur}
                 ></textarea>
               </div>
@@ -234,7 +253,7 @@ const EditInvoiceItem = (props) => {
                 </thead>
                 <tbody>
                   {listItems.map((item, index) => (
-                    <tr key={index}>
+                    <tr data-1={item} key={index}>
                       <td className={classes["more-padding"]}>{counter++}</td>
                       <td>
                         <input
@@ -249,7 +268,7 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikEditInvoice.values.item_name}
+                          value={item.item_name}
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
@@ -266,7 +285,7 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikEditInvoice.values.unit_costs}
+                          value={item.unit_costs}
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
@@ -283,7 +302,7 @@ const EditInvoiceItem = (props) => {
                               e.currentTarget.value
                             )
                           }
-                          value={formikEditInvoice.values.units}
+                          value={item.unit}
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>

@@ -7,15 +7,11 @@ export const INVOICES_LIST = [
     bill_to: "REDQ Inc.",
     total_cost: "14630",
     status: "Pending",
-    order_date: "February 17th 2018",
-    bill_from_email: "pineapple@company.com",
-    bill_from_address: "86781 547th Ave, Osmond, NE, 68765",
-    bill_from_phone: "+(402) 748-3970",
-    bill_from_fax: "",
-    bill_to_email: "redq@company.com",
-    bill_to_address: "405 Mulberry Rd, Mc Grady, NC, 28649",
-    bill_to_phone: "+(740) 927-9284",
-    bill_to_fax: "+0(863) 228-7064",
+    order_date: "02.17.2018",
+    bill_from_info:
+      "pineapple@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
+    bill_to_info:
+      "redq@company.com, 405 Mulberry Rd, Mc Grady, NC, 28649, +(740) 927-9284, +0(863) 228-7064",
     ITEMS: [
       {
         item_name: "A box of happiness",
@@ -36,15 +32,11 @@ export const INVOICES_LIST = [
     bill_to: "Intel Inc.",
     total_cost: "14630",
     status: "Delivered",
-    order_date: "February 18th 2019",
-    bill_from_email: "pineapple@company.com",
-    bill_from_address: "86781 547th Ave, Osmond, NE, 68765",
-    bill_from_phone: "+(402) 748-3970",
-    bill_from_fax: "",
-    bill_to_email: "redq@company.com",
-    bill_to_address: "405 Mulberry Rd, Mc Grady, NC, 28649",
-    bill_to_phone: "+(740) 927-9284",
-    bill_to_fax: "+0(863) 228-7064",
+    order_date: "02.18.2019",
+    bill_from_info:
+      "pineapple@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
+    bill_to_info:
+      "redq@company.com, 405 Mulberry Rd, Mc Grady, NC, 28649, +(740) 927-9284, +0(863) 228-7064",
     ITEMS: [
       {
         item_name: "Unicorn Tears",
@@ -65,15 +57,11 @@ export const INVOICES_LIST = [
     bill_to: "Samsung",
     total_cost: "14630",
     status: "Shipped",
-    order_date: "February 19th 2020",
-    bill_from_email: "pineapple@company.com",
-    bill_from_address: "86781 547th Ave, Osmond, NE, 68765",
-    bill_from_phone: "+(402) 748-3970",
-    bill_from_fax: "",
-    bill_to_email: "redq@company.com",
-    bill_to_address: "405 Mulberry Rd, Mc Grady, NC, 28649",
-    bill_to_phone: "+(740) 927-9284",
-    bill_to_fax: "+0(863) 228-7064",
+    order_date: "02.19.2020",
+    bill_from_info:
+      "pineapple@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
+    bill_to_info:
+      "redq@company.com, 405 Mulberry Rd, Mc Grady, NC, 28649, +(740) 927-9284, +0(863) 228-7064",
     ITEMS: [
       {
         item_name: "Rainbow Machine",

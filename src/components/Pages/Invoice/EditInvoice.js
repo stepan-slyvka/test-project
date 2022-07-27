@@ -18,11 +18,12 @@ const EditInvoice = () => {
     <EditInvoiceItem
       invoiceNumber={invoice.invoice_num}
       billFrom={invoice.bill_from}
-      billFromAddress={invoice.bill_from_address}
+      billFromInfo={invoice.bill_from_info}
       billTo={invoice.bill_to}
-      billToAddress={invoice.bill_to_address}
+      billToInfo={invoice.bill_to_info}
       status={invoice.status}
       orderDate={invoice.order_date}
+      items={invoice.ITEMS}
       itemName={invoice.item_name}
       unitCosts={invoice.unit_costs}
       units={invoice.units}
