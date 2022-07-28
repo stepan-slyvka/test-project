@@ -50,10 +50,8 @@ const AddInvoiceItem = (props) => {
         id: uuidv4(),
         invoiceNumber: invoice.invoiceNumber,
         billFrom: invoice.billFrom,
-        billFromAddress: invoice.billFromAddress,
         billFromInfo: invoice.billFromInfo,
         billTo: invoice.billTo,
-        billToAddress: invoice.billToAddress,
         billToInfo: invoice.billToInfo,
         status: selectedOption,
         order_date: startDate.toLocaleDateString(),
@@ -66,9 +64,9 @@ const AddInvoiceItem = (props) => {
     initialValues: {
       invoiceNumber: "#",
       billFrom: "",
-      billFromAddress: "",
+      billFromInfo: "",
       billTo: "",
-      billToAddress: "",
+      billToInfo: "",
     },
     onSubmit: (val) => {
       addInvoiceHandler(val);
@@ -177,11 +175,11 @@ const AddInvoiceItem = (props) => {
                   onBlur={formikInvoice.handleBlur}
                 ></input>
                 <textarea
-                  placeholder="Bill From Address"
-                  name="billFromAddress"
-                  id="billFromAddress"
+                  placeholder="Bill From Info"
+                  name="billFromInfo"
+                  id="billFromInfo"
                   onChange={formikInvoice.handleChange}
-                  value={formikInvoice.values.billFromAddress}
+                  value={formikInvoice.values.billFromInfo}
                   onBlur={formikInvoice.handleBlur}
                 ></textarea>
               </div>
@@ -196,11 +194,11 @@ const AddInvoiceItem = (props) => {
                   onBlur={formikInvoice.handleBlur}
                 ></input>
                 <textarea
-                  placeholder="Bill To Address"
-                  name="billToAddress"
-                  id="billToAddress"
+                  placeholder="Bill To Info"
+                  name="billToInfo"
+                  id="billToInfo"
                   onChange={formikInvoice.handleChange}
-                  value={formikInvoice.values.billToAddress}
+                  value={formikInvoice.values.billToInfo}
                   onBlur={formikInvoice.handleBlur}
                 ></textarea>
               </div>

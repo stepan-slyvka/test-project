@@ -28,8 +28,6 @@ const AllInvoices = (props) => {
 
   const invoiceList = useSelector((state) => state.invoice.invoices);
 
-  console.log(invoiceList);
-  
   return (
     <Fragment>
       <Wrapper isShrinked={props.isShrinked}>

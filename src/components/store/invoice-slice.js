@@ -15,9 +15,9 @@ const invoiceSlice = createSlice({
       state.invoices.push({
         id: uuidv4(),
         bill_from: newItem.billFrom,
-        bill_from_address: newItem.billFromAddress,
+        bill_from_info: newItem.billFromInfo,
         bill_to: newItem.billTo,
-        bill_to_address: newItem.billToAddress,
+        bill_to_info: newItem.billToInfo,
         invoice_num: newItem.invoiceNumber,
         status: newItem.status,
         order_date: newItem.order_date,
@@ -32,13 +32,13 @@ const invoiceSlice = createSlice({
     editInvoice(state) {
       const existingItem = state.invoices;
       existingItem.map((item) => {
-        if (existingItem === item) {
+        if (existingItem.id === item.id) {
           return {
             id: item.id,
             bill_from: item.billFrom,
-            bill_from_address: item.billFromAddress,
+            bill_from_info: item.billFromInfo,
             bill_to: item.billTo,
-            bill_to_address: item.billToAddress,
+            bill_to_info: item.billToInfo,
             invoice_num: item.invoiceNumber,
             status: item.status,
             order_date: item.order_date,

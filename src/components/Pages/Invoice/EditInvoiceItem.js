@@ -40,8 +40,6 @@ const EditInvoiceItem = (props) => {
 
   // console.log(props.orderDate.toJSON());
 
-  console.log(props.items);
-
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
     dispatch(uiActions.toggleMoreOptions());
@@ -49,21 +47,14 @@ const EditInvoiceItem = (props) => {
 
   const editInvoiceHandler = (invoice) => {
     console.log(invoice);
-    console.log(selectedOption);
     dispatch(
       invoiceActions.editInvoice({
         id: invoice.id,
         invoiceNumber: invoice.invoiceNumber,
         billFrom: invoice.billFrom,
-        billFromAddress: invoice.billFromAddress,
-        billFromEmail: invoice.billFromEmail,
-        billFromPhone: invoice.billFromPhone,
-        billFromFax: invoice.billFromFax,
+        billFromInfo: invoice.billFromInfo,
         billTo: invoice.billTo,
-        billToAddress: invoice.billToAddress,
-        billToPhone: invoice.billToPhone,
-        billToEmail: invoice.billToEmail,
-        billToFax: invoice.billToFax,
+        billToInfo: invoice.billToInfo,
         status: selectedOption,
         order_date: startDate.toLocaleDateString(),
         ITEMS: [...updateValuesOnSubmit()],
@@ -75,16 +66,8 @@ const EditInvoiceItem = (props) => {
     initialValues: {
       invoiceNumber: props.invoiceNumber,
       billFrom: props.billFrom,
-      billFromAddress: props.billFromAddress,
-      billFromEmail: props.billFromEmail,
-      billFromPhone: props.billFromPhone,
-      billFromFax: props.billFromFax,
       billFromInfo: props.billFromInfo,
       billTo: props.billTo,
-      billToAddress: props.billToAddress,
-      billToPhone: props.billToPhone,
-      billToEmail: props.billToEmail,
-      billToFax: props.billToFax,
       billToInfo: props.billToInfo,
       status: props.status,
       order_date: props.orderDate,
