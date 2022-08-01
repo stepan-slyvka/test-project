@@ -31,14 +31,14 @@ const EditInvoiceItem = (props) => {
 
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
+  // const orderDate = new Date(props.orderDate);
+
   const [startDate, setStartDate] = useState(date);
-  // const [startDate, setStartDate] = useState(props.orderDate || date);
+  // const [startDate, setStartDate] = useState(orderDate);
   const [selectedOption, setSelectedOption] = useState(
     props.status || options[0]
   );
   const [listItems, setListItems] = useState(props.items || inputs);
-
-  // console.log(props.orderDate.toJSON());
 
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
@@ -64,6 +64,7 @@ const EditInvoiceItem = (props) => {
 
   const formikEditInvoice = useFormik({
     initialValues: {
+      id: props.id,
       invoiceNumber: props.invoiceNumber,
       billFrom: props.billFrom,
       billFromInfo: props.billFromInfo,
@@ -98,7 +99,16 @@ const EditInvoiceItem = (props) => {
   };
 
   const updateItemHandler = (index, inputName, value) => {
-    listItems[index] = { ...listItems[index], [inputName]: value };
+    setListItems((listItems) =>
+      listItems.map((item, i) =>
+        i === index
+          ? {
+              ...item,
+              [inputName]: value,
+            }
+          : item
+      )
+    );
   };
 
   const updateValuesOnSubmit = () => {

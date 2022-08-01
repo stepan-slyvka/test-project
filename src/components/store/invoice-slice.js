@@ -29,24 +29,24 @@ const invoiceSlice = createSlice({
       const id = action.payload;
       state.invoices = state.invoices.filter((item) => item.id !== id);
     },
-    editInvoice(state) {
-      const existingItem = state.invoices;
-      existingItem.map((item) => {
-        if (existingItem.id === item.id) {
-          return {
-            id: item.id,
-            bill_from: item.billFrom,
-            bill_from_info: item.billFromInfo,
-            bill_to: item.billTo,
-            bill_to_info: item.billToInfo,
-            invoice_num: item.invoiceNumber,
-            status: item.status,
-            order_date: item.order_date,
-            ITEMS: [...item.ITEMS],
-          };
-        }
-        return item;
-      });
+    editInvoice(state, action) {
+      const { payload } = action;
+
+      state.invoices = state.invoices.map((item) =>
+        item.id === payload.id
+          ? {
+              ...item,
+              bill_from: payload.billFrom,
+              bill_from_info: payload.billFromInfo,
+              bill_to: payload.billTo,
+              bill_to_info: payload.billToInfo,
+              invoice_num: payload.invoiceNumber,
+              status: payload.status,
+              order_date: payload.order_date,
+              ITEMS: payload.ITEMS.slice(),
+            }
+          : item
+      );
     },
   },
 });

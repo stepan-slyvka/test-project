@@ -152,6 +152,7 @@ const AddInvoiceItem = (props) => {
                 <div className={classes["order-date"]}>
                   <span>Order Date:</span>
                   <DatePicker
+                    dateFormat="dd-MM-yyyy"
                     className={classes["order-date-input"]}
                     selected={startDate}
                     onChange={(val) => setStartDate(val)}

@@ -16,6 +16,7 @@ const EditInvoice = () => {
 
   return invoice ? (
     <EditInvoiceItem
+      id={invoice.id}
       invoiceNumber={invoice.invoice_num}
       billFrom={invoice.bill_from}
       billFromInfo={invoice.bill_from_info}
