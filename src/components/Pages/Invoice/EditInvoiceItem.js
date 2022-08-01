@@ -25,21 +25,19 @@ import { useNavigate } from "react-router-dom";
 const EditInvoiceItem = (props) => {
   const navigate = useNavigate();
 
-  const date = new Date();
-
   const options = ["Pending", "Shipped", "Delivered"];
 
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
   // const orderDate = new Date(props.orderDate);
 
-  const [startDate, setStartDate] = useState(date);
+  const [startDate, setStartDate] = useState(new Date(props.orderDate));
   // const [startDate, setStartDate] = useState(orderDate);
   const [selectedOption, setSelectedOption] = useState(
     props.status || options[0]
   );
   const [listItems, setListItems] = useState(props.items || inputs);
-
+	console.log(startDate);
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
     dispatch(uiActions.toggleMoreOptions());
