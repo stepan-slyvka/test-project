@@ -22,6 +22,9 @@ const InvoiceItem = () => {
       bill_from_info={invoice.bill_from_info}
       bill_to={invoice.bill_to}
       bill_to_info={invoice.bill_to_info}
+      sub_total={invoice.sub_total}
+      vat={invoice.vat}
+      grand_total={invoice.grand_total}
       items={invoice.ITEMS}
     />
   ) : (

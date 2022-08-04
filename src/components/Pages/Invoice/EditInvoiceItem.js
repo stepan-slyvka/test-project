@@ -25,16 +25,11 @@ import { useNavigate } from "react-router-dom";
 const EditInvoiceItem = (props) => {
   const navigate = useNavigate();
 
-  const date = new Date();
-
   const options = ["Pending", "Shipped", "Delivered"];
 
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
-  // const orderDate = new Date(props.orderDate);
-
-  const [startDate, setStartDate] = useState(date);
-  // const [startDate, setStartDate] = useState(orderDate);
+  const [startDate, setStartDate] = useState(new Date(props.orderDate));
   const [selectedOption, setSelectedOption] = useState(
     props.status || options[0]
   );
@@ -301,9 +296,8 @@ const EditInvoiceItem = (props) => {
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
-                      <td>0</td>
+                      <td>{item.unit_costs * item.unit}</td>
                       <td></td>
-                      {/* There should be dynamic values later */}
                     </tr>
                   ))}
                 </tbody>
@@ -337,8 +331,7 @@ const EditInvoiceItem = (props) => {
                 <div className={classes["grand-total"]}>
                   <h3>Grand Total</h3>
                   <div className={classes.input}>
-                    <input type="text" defaultValue="$"></input>
-                    <span>0</span>
+                    <span>$0</span>
                     {/* Dynamic value later here */}
                   </div>
                 </div>

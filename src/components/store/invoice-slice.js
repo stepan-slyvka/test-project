@@ -8,6 +8,7 @@ const invoiceSlice = createSlice({
   name: "invoice",
   initialState: {
     invoices: INVOICES_LIST,
+    subTotal: 0,
   },
   reducers: {
     addNewInvoice(state, action) {
@@ -48,6 +49,15 @@ const invoiceSlice = createSlice({
           : item
       );
     },
+    calcPrice(state) {
+      state.subTotal = state.invoices.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.ITEMS.grand_total,
+        0
+      );
+    },
+    calcVat(state, action) {},
+    calcTotal(state, action) {},
   },
 });
 

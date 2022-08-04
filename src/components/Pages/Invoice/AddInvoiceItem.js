@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { uiActions } from "../../store/ui-slice";
@@ -43,8 +43,6 @@ const AddInvoiceItem = (props) => {
   };
 
   const addInvoiceHandler = (invoice) => {
-    console.log(invoice);
-    console.log(selectedOption);
     dispatch(
       invoiceActions.addNewInvoice({
         id: uuidv4(),
@@ -97,6 +95,16 @@ const AddInvoiceItem = (props) => {
   const updateValuesOnSubmit = () => {
     return listItems;
   };
+
+  const items = useSelector((state) => state.invoice.invoices);
+
+  useEffect(() => {
+    dispatch(invoiceActions.calcPrice(items));
+  }, [dispatch, items]);
+
+  const subTotal = useSelector((state) => state.invoice.invoices.subTotal);
+
+  console.log(subTotal);
 
   return (
     <form onSubmit={formikInvoice.handleSubmit}>
@@ -279,9 +287,8 @@ const AddInvoiceItem = (props) => {
                           onBlur={formikInvoice.handleBlur}
                         ></input>
                       </td>
-                      <td>0</td>
+                      <td>{item.unit_costs * item.unit}</td>
                       <td></td>
-                      {/* There should be dynamic values later */}
                     </tr>
                   ))}
                 </tbody>
@@ -298,7 +305,7 @@ const AddInvoiceItem = (props) => {
               <div className={classes.total}>
                 <p className={classes["sub-total"]}>
                   <span>Sub Total: </span>
-                  <span>$0</span>
+                  <span>${subTotal}</span>
                   {/* Dynamic value later here */}
                 </p>
                 <div className={classes["total-vat"]}>
@@ -315,8 +322,7 @@ const AddInvoiceItem = (props) => {
                 <div className={classes["grand-total"]}>
                   <h3>Grand Total</h3>
                   <div className={classes.input}>
-                    <input type="text" defaultValue="$"></input>
-                    <span>0</span>
+                    <span>$0</span>
                     {/* Dynamic value later here */}
                   </div>
                 </div>
