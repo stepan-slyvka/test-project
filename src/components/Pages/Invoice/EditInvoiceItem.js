@@ -29,19 +29,12 @@ const EditInvoiceItem = (props) => {
 
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
-<<<<<<< HEAD
   const [startDate, setStartDate] = useState(new Date(props.orderDate));
-=======
-  // const orderDate = new Date(props.orderDate);
-
-  const [startDate, setStartDate] = useState(new Date(props.orderDate));
-  // const [startDate, setStartDate] = useState(orderDate);
->>>>>>> 582f70e0cc0724cf61423bd6ff05885ee4706649
   const [selectedOption, setSelectedOption] = useState(
     props.status || options[0]
   );
   const [listItems, setListItems] = useState(props.items || inputs);
-	console.log(startDate);
+  console.log(startDate);
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
     dispatch(uiActions.toggleMoreOptions());
