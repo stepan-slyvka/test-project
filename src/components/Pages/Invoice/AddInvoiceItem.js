@@ -89,6 +89,7 @@ const AddInvoiceItem = (props) => {
   };
 
   const updateItemHandler = (index, inputName, value) => {
+    // console.log(listItems);
     listItems[index] = { ...listItems[index], [inputName]: value };
   };
 
