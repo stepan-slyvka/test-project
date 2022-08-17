@@ -113,6 +113,7 @@ const AddInvoiceItem = (props) => {
   console.log(totalVatValue);
 
   const updateItemHandler = (index, inputName, value) => {
+    // console.log(listItems);
     listItems[index] = { ...listItems[index], [inputName]: value };
     calculateTotal();
     calcTotalVat();
