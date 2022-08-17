@@ -34,11 +34,7 @@ const EditInvoiceItem = (props) => {
   const [selectedOption, setSelectedOption] = useState(
     props.status || options[0]
   );
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 6c07b50c5746a81715a42383e5992f558b0e0f96
   const [listItems, setListItems] = useState(props.items || inputs);
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
@@ -96,18 +92,6 @@ const EditInvoiceItem = (props) => {
   const addItemHandler = () => {
     setListItems(listItems.concat({ item_name: "", unit_costs: "", unit: "" }));
   };
-	
-	const calculateTotal = () => {
-		let subtotal = 0;
-		
-		listItems.map((item) => {
-			var itemTotal = parseFloat(item.unit_costs) * parseFloat(item.unit);
-			subtotal = subtotal + itemTotal;
-		});
-		
-		setSubtotal(subtotal)
-		
-	}
 
   const calculateTotal = () => {
     let subtotal = 0;
@@ -121,7 +105,6 @@ const EditInvoiceItem = (props) => {
   };
 
   const updateItemHandler = (index, inputName, value) => {
-  	
     setListItems((listItems) =>
       listItems.map((item, i) =>
         i === index
@@ -344,10 +327,6 @@ const EditInvoiceItem = (props) => {
                 <p className={classes["sub-total"]}>
                   <span>Sub Total: </span>
                   <span>${subtotalValue}</span>
-<<<<<<< HEAD
-=======
-                  {/* Dynamic value later here */}
->>>>>>> 6c07b50c5746a81715a42383e5992f558b0e0f96
                 </p>
                 <div className={classes["total-vat"]}>
                   <span>Total Vat:</span>
