@@ -37,10 +37,17 @@ const AddInvoiceItem = (props) => {
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [listItems, setListItems] = useState(inputs);
   const [subtotalValue, setSubtotal] = useState(0);
+  const [totalVatPercentage, setTotalVatParcentage] = useState(0);
   const [totalVatValue, setTotalVatValue] = useState(0);
+  const [grandTotalValue, setGrandTotalValue] = useState(0);
 
   const listenTotalVat = (event) => {
-    setTotalVatValue(event.target.value);
+  	const totalVat = parseInt(parseFloat(event.target.value) * parseFloat(subtotalValue) / 100);
+		const grandTotal = subtotalValue + totalVat;
+		
+		setGrandTotalValue(grandTotal);
+  	setTotalVatParcentage(parseInt(event.target.value));
+    setTotalVatValue(totalVat);
   };
 
   const optionClickHandler = (value) => () => {
@@ -329,7 +336,7 @@ const AddInvoiceItem = (props) => {
                   <div className={classes["total-sum"]}>
                     <span className={classes["input-wrapper"]}>
                       <input
-                        value={totalVatValue}
+                        value={totalVatPercentage}
                         onChange={listenTotalVat}
                       ></input>
                       <span>%</span>
@@ -340,8 +347,7 @@ const AddInvoiceItem = (props) => {
                 <div className={classes["grand-total"]}>
                   <h3>Grand Total</h3>
                   <div className={classes.input}>
-                    <span>$0</span>
-                    {/* Dynamic value later here */}
+                    <span>${grandTotalValue}</span>
                   </div>
                 </div>
               </div>
