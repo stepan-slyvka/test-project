@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { uiActions } from "../../store/ui-slice";
@@ -36,6 +36,12 @@ const AddInvoiceItem = (props) => {
   const [startDate, setStartDate] = useState(date);
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [listItems, setListItems] = useState(inputs);
+  const [subtotalValue, setSubtotal] = useState(0);
+  const [totalVatValue, setTotalVatValue] = useState(0);
+
+  const listenTotalVat = (event) => {
+    setTotalVatValue(event.target.value);
+  };
 
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
@@ -88,23 +94,33 @@ const AddInvoiceItem = (props) => {
     setListItems(listItems.concat({ item_name: "", unit_costs: "", unit: "" }));
   };
 
+  const calculateTotal = () => {
+    let subtotal = 0;
+
+    listItems.map((item) => {
+      const itemTotal = parseFloat(item.unit_costs) * parseFloat(item.unit);
+      return (subtotal = subtotal + itemTotal);
+    });
+
+    setSubtotal(subtotal);
+  };
+
+  const calcTotalVat = () => {
+    const totalVat = parseFloat(subtotalValue * totalVatValue) / 100;
+    return parseFloat(totalVat);
+  };
+
+  console.log(totalVatValue);
+
   const updateItemHandler = (index, inputName, value) => {
     listItems[index] = { ...listItems[index], [inputName]: value };
+    calculateTotal();
+    calcTotalVat();
   };
 
   const updateValuesOnSubmit = () => {
     return listItems;
   };
-
-  const items = useSelector((state) => state.invoice.invoices);
-
-  useEffect(() => {
-    dispatch(invoiceActions.calcPrice(items));
-  }, [dispatch, items]);
-
-  const subTotal = useSelector((state) => state.invoice.invoices.subTotal);
-
-  console.log(subTotal);
 
   return (
     <form onSubmit={formikInvoice.handleSubmit}>
@@ -305,18 +321,19 @@ const AddInvoiceItem = (props) => {
               <div className={classes.total}>
                 <p className={classes["sub-total"]}>
                   <span>Sub Total: </span>
-                  <span>${subTotal}</span>
-                  {/* Dynamic value later here */}
+                  <span>${subtotalValue}</span>
                 </p>
                 <div className={classes["total-vat"]}>
                   <span>Total Vat:</span>
                   <div className={classes["total-sum"]}>
                     <span className={classes["input-wrapper"]}>
-                      <input type="text" defaultValue="10"></input>
+                      <input
+                        value={totalVatValue}
+                        onChange={listenTotalVat}
+                      ></input>
                       <span>%</span>
                     </span>
-                    <span className={classes.sum}>$0</span>
-                    {/* Dynamic value later here */}
+                    <span className={classes.sum}>${totalVatValue}</span>
                   </div>
                 </div>
                 <div className={classes["grand-total"]}>

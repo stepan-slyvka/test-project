@@ -96,7 +96,7 @@ const InvoiceItemDescription = (props) => {
                       <td>{item.item_name}</td>
                       <td>{item.unit_costs}</td>
                       <td>{item.unit}</td>
-                      <td>{item.unit_costs * item.unit}</td>
+                      <td>{item.price}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -105,7 +105,7 @@ const InvoiceItemDescription = (props) => {
             <div className={classes.total}>
               <p>
                 Sub-total:
-                <span>{props.sub_total}</span>
+                <span>{props.subTotalValue}</span>
               </p>
               <p>
                 Vat:

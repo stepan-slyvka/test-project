@@ -30,18 +30,18 @@ const EditInvoiceItem = (props) => {
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
   const [startDate, setStartDate] = useState(new Date(props.orderDate));
+  const [subtotalValue, setSubtotal] = useState(0);
   const [selectedOption, setSelectedOption] = useState(
     props.status || options[0]
   );
+
   const [listItems, setListItems] = useState(props.items || inputs);
-  console.log(startDate);
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
     dispatch(uiActions.toggleMoreOptions());
   };
 
   const editInvoiceHandler = (invoice) => {
-    console.log(invoice);
     dispatch(
       invoiceActions.editInvoice({
         id: invoice.id,
@@ -93,6 +93,17 @@ const EditInvoiceItem = (props) => {
     setListItems(listItems.concat({ item_name: "", unit_costs: "", unit: "" }));
   };
 
+  const calculateTotal = () => {
+    let subtotal = 0;
+
+    listItems.map((item) => {
+      const itemTotal = parseFloat(item.unit_costs) * parseFloat(item.unit);
+      return (subtotal = subtotal + itemTotal);
+    });
+
+    setSubtotal(subtotal);
+  };
+
   const updateItemHandler = (index, inputName, value) => {
     setListItems((listItems) =>
       listItems.map((item, i) =>
@@ -104,6 +115,7 @@ const EditInvoiceItem = (props) => {
           : item
       )
     );
+    calculateTotal();
   };
 
   const updateValuesOnSubmit = () => {
@@ -314,8 +326,7 @@ const EditInvoiceItem = (props) => {
               <div className={classes.total}>
                 <p className={classes["sub-total"]}>
                   <span>Sub Total: </span>
-                  <span>$0</span>
-                  {/* Dynamic value later here */}
+                  <span>${subtotalValue}</span>
                 </p>
                 <div className={classes["total-vat"]}>
                   <span>Total Vat:</span>
