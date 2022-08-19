@@ -96,6 +96,8 @@ const AllInvoices = (props) => {
                         bill_from: invoice.bill_from,
                         bill_to: invoice.bill_to,
                         status: invoice.status,
+                        grand_total: invoice.grand_total,
+                        grandTotalValue: props.grandTotalValue,
                       }}
                     />
                   ))}

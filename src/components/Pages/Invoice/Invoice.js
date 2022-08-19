@@ -12,7 +12,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Invoice = (props) => {
-  const { id, invoice_num, bill_from, bill_to, status } = props.invoiceItem;
+  const {
+    id,
+    invoice_num,
+    bill_from,
+    bill_to,
+    status,
+    grand_total,
+    grandTotalValue,
+  } = props.invoiceItem;
 
   const dispatch = useDispatch();
 
@@ -37,8 +45,7 @@ const Invoice = (props) => {
         <span>{bill_to}</span>
       </td>
       <td>
-        <span>14300</span>
-        {/* This should be a dynamic value later */}
+        <span>{grand_total || grandTotalValue}</span>
       </td>
       <td>
         <span

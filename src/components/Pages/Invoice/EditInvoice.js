@@ -7,7 +7,7 @@ import classes from "./EditInvoice.module.css";
 
 import EditInvoiceItem from "./EditInvoiceItem";
 
-const EditInvoice = () => {
+const EditInvoice = (props) => {
   const { invoiceId } = useParams();
 
   const invoices = useSelector((state) => state.invoice.invoices);
@@ -28,6 +28,9 @@ const EditInvoice = () => {
       itemName={invoice.item_name}
       unitCosts={invoice.unit_costs}
       units={invoice.units}
+      grand_total={invoice.grand_total}
+      listItems={props.listItems}
+      setListItems={props.setListItems}
     />
   ) : (
     <div className={classes.centered}>Invoice Not Found.</div>

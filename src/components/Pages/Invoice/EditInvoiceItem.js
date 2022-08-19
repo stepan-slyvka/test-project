@@ -30,12 +30,27 @@ const EditInvoiceItem = (props) => {
   const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
   const [startDate, setStartDate] = useState(new Date(props.orderDate));
-  const [subtotalValue, setSubtotal] = useState(0);
   const [selectedOption, setSelectedOption] = useState(
     props.status || options[0]
   );
 
   const [listItems, setListItems] = useState(props.items || inputs);
+  const [subtotalValue, setSubtotal] = useState(0);
+  const [totalVatPercentage, setTotalVatParcentage] = useState(0);
+  const [totalVatValue, setTotalVatValue] = useState(0);
+  const [grandTotalValue, setGrandTotalValue] = useState(0);
+
+  const listenTotalVat = (event) => {
+    const totalVat = parseInt(
+      (parseFloat(event.target.value) * parseFloat(subtotalValue)) / 100
+    );
+    const grandTotal = subtotalValue + totalVat;
+
+    setGrandTotalValue(grandTotal);
+    setTotalVatParcentage(parseInt(event.target.value));
+    setTotalVatValue(totalVat);
+  };
+
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
     dispatch(uiActions.toggleMoreOptions());
@@ -51,7 +66,8 @@ const EditInvoiceItem = (props) => {
         billTo: invoice.billTo,
         billToInfo: invoice.billToInfo,
         status: selectedOption,
-        order_date: startDate.toLocaleDateString(),
+        order_date: startDate.toUTCString(),
+        grand_total: props.grandTotalValue,
         ITEMS: [...updateValuesOnSubmit()],
       })
     );
@@ -66,7 +82,8 @@ const EditInvoiceItem = (props) => {
       billTo: props.billTo,
       billToInfo: props.billToInfo,
       status: props.status,
-      order_date: props.orderDate,
+      order_date: startDate,
+      grand_total: props.grandTotalValue,
       item_name: props.itemName,
       unit_costs: props.unitCosts,
       units: props.units,
@@ -182,6 +199,7 @@ const EditInvoiceItem = (props) => {
                 <div className={classes["order-date"]}>
                   <span>Order Date:</span>
                   <DatePicker
+                    dateFormat="MM/dd/yyyy"
                     className={classes["order-date-input"]}
                     selected={startDate}
                     onChange={(val) => setStartDate(val)}
@@ -308,7 +326,7 @@ const EditInvoiceItem = (props) => {
                           onBlur={formikEditInvoice.handleBlur}
                         ></input>
                       </td>
-                      <td>{item.unit_costs * item.unit}</td>
+                      <td>{subtotalValue}</td>
                       <td></td>
                     </tr>
                   ))}
@@ -332,18 +350,19 @@ const EditInvoiceItem = (props) => {
                   <span>Total Vat:</span>
                   <div className={classes["total-sum"]}>
                     <span className={classes["input-wrapper"]}>
-                      <input type="text" defaultValue="10"></input>
+                      <input
+                        value={totalVatPercentage}
+                        onChange={listenTotalVat}
+                      ></input>
                       <span>%</span>
                     </span>
-                    <span className={classes.sum}>$0</span>
-                    {/* Dynamic value later here */}
+                    <span className={classes.sum}>${totalVatValue}</span>
                   </div>
                 </div>
                 <div className={classes["grand-total"]}>
                   <h3>Grand Total</h3>
                   <div className={classes.input}>
-                    <span>$0</span>
-                    {/* Dynamic value later here */}
+                    <span>${grandTotalValue}</span>
                   </div>
                 </div>
               </div>

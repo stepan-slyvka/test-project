@@ -2,11 +2,11 @@ export const INVOICES_LIST = [
   {
     id: "09u34otiuhnrfgp9ioj45",
     number: Math.random().toFixed(2),
-    invoice_num: "#1232",
+    invoice_num: "#1230",
     bill_from: "Pineapple Inc.",
     bill_to: "REDQ Inc.",
     status: "Pending",
-    order_date: "02.17.2018",
+    order_date: "02/17/2018",
     bill_from_info:
       "pineapple@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
     bill_to_info:
@@ -26,15 +26,15 @@ export const INVOICES_LIST = [
   {
     id: "234098ujh43gikoljaerpgiojaerg",
     number: Math.random().toFixed(2),
-    invoice_num: "#1232",
+    invoice_num: "#1231",
     bill_from: "AMD Inc.",
     bill_to: "Intel Inc.",
     status: "Delivered",
-    order_date: "02.18.2019",
+    order_date: "02/18/2019",
     bill_from_info:
-      "pineapple@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
+      "amd@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
     bill_to_info:
-      "redq@company.com, 405 Mulberry Rd, Mc Grady, NC, 28649, +(740) 927-9284, +0(863) 228-7064",
+      "intel@company.com, 405 Mulberry Rd, Mc Grady, NC, 28649, +(740) 927-9284, +0(863) 228-7064",
     ITEMS: [
       {
         item_name: "Unicorn Tears",
@@ -54,11 +54,11 @@ export const INVOICES_LIST = [
     bill_from: "Apple Inc.",
     bill_to: "Samsung",
     status: "Shipped",
-    order_date: "02.19.2020",
+    order_date: "02/19/2020",
     bill_from_info:
-      "pineapple@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
+      "apple@company.com, 86781 547th Ave, Osmond, NE, 68765, +(402) 748-3970",
     bill_to_info:
-      "redq@company.com, 405 Mulberry Rd, Mc Grady, NC, 28649, +(740) 927-9284, +0(863) 228-7064",
+      "samsung@company.com, 405 Mulberry Rd, Mc Grady, NC, 28649, +(740) 927-9284, +0(863) 228-7064",
     ITEMS: [
       {
         item_name: "Rainbow Machine",

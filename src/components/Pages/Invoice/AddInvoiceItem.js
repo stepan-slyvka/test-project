@@ -31,17 +31,26 @@ const AddInvoiceItem = (props) => {
 
   const options = ["Pending", "Shipped", "Delivered"];
 
-  const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
+  // const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
 
   const [startDate, setStartDate] = useState(date);
   const [selectedOption, setSelectedOption] = useState(options[0]);
-  const [listItems, setListItems] = useState(inputs);
-  const [subtotalValue, setSubtotal] = useState(0);
-  const [totalVatValue, setTotalVatValue] = useState(0);
+  // const [listItems, setListItems] = useState(inputs);
+  // const [subtotalValue, setSubtotal] = useState(0);
+  // const [totalVatPercentage, setTotalVatParcentage] = useState(0);
+  // const [totalVatValue, setTotalVatValue] = useState(0);
+  // const [grandTotalValue, setGrandTotalValue] = useState(0);
 
-  const listenTotalVat = (event) => {
-    setTotalVatValue(event.target.value);
-  };
+  // const listenTotalVat = (event) => {
+  //   const totalVat = parseInt(
+  //     (parseFloat(event.target.value) * parseFloat(subtotalValue)) / 100
+  //   );
+  //   const grandTotal = subtotalValue + totalVat;
+
+  //   setGrandTotalValue(grandTotal);
+  //   setTotalVatParcentage(parseInt(event.target.value));
+  //   setTotalVatValue(totalVat);
+  // };
 
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
@@ -58,7 +67,8 @@ const AddInvoiceItem = (props) => {
         billTo: invoice.billTo,
         billToInfo: invoice.billToInfo,
         status: selectedOption,
-        order_date: startDate.toLocaleDateString(),
+        order_date: startDate.toUTCString(),
+        grand_total: props.grandTotalValue,
         ITEMS: [...updateValuesOnSubmit()],
       })
     );
@@ -91,36 +101,29 @@ const AddInvoiceItem = (props) => {
   let counter = 1;
 
   const addItemHandler = () => {
-    setListItems(listItems.concat({ item_name: "", unit_costs: "", unit: "" }));
+    props.setListItems(
+      props.listItems.concat({ item_name: "", unit_costs: "", unit: "" })
+    );
   };
 
-  const calculateTotal = () => {
-    let subtotal = 0;
+  // const calculateTotal = () => {
+  //   let subtotal = 0;
 
-    listItems.map((item) => {
-      const itemTotal = parseFloat(item.unit_costs) * parseFloat(item.unit);
-      return (subtotal = subtotal + itemTotal);
-    });
+  //   listItems.map((item) => {
+  //     const itemTotal = parseFloat(item.unit_costs) * parseFloat(item.unit);
+  //     return (subtotal = subtotal + itemTotal);
+  //   });
 
-    setSubtotal(subtotal);
-  };
-
-  const calcTotalVat = () => {
-    const totalVat = parseFloat(subtotalValue * totalVatValue) / 100;
-    return parseFloat(totalVat);
-  };
-
-  console.log(totalVatValue);
+  //   setSubtotal(subtotal);
+  // };
 
   const updateItemHandler = (index, inputName, value) => {
-    // console.log(listItems);
-    listItems[index] = { ...listItems[index], [inputName]: value };
-    calculateTotal();
-    calcTotalVat();
+    props.listItems[index] = { ...props.listItems[index], [inputName]: value };
+    props.calculateTotal();
   };
 
   const updateValuesOnSubmit = () => {
-    return listItems;
+    return props.listItems;
   };
 
   return (
@@ -177,7 +180,7 @@ const AddInvoiceItem = (props) => {
                 <div className={classes["order-date"]}>
                   <span>Order Date:</span>
                   <DatePicker
-                    dateFormat="dd-MM-yyyy"
+                    dateFormat="MM/dd/yyyy"
                     className={classes["order-date-input"]}
                     selected={startDate}
                     onChange={(val) => setStartDate(val)}
@@ -250,7 +253,7 @@ const AddInvoiceItem = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {listItems.map((item, index) => (
+                  {props.listItems.map((item, index) => (
                     <tr key={index}>
                       <td className={classes["more-padding"]}>{counter++}</td>
                       <td>
@@ -322,26 +325,25 @@ const AddInvoiceItem = (props) => {
               <div className={classes.total}>
                 <p className={classes["sub-total"]}>
                   <span>Sub Total: </span>
-                  <span>${subtotalValue}</span>
+                  <span>${props.subtotalValue}</span>
                 </p>
                 <div className={classes["total-vat"]}>
                   <span>Total Vat:</span>
                   <div className={classes["total-sum"]}>
                     <span className={classes["input-wrapper"]}>
                       <input
-                        value={totalVatValue}
-                        onChange={listenTotalVat}
+                        value={props.totalVatPercentage}
+                        onChange={props.listenTotalVat}
                       ></input>
                       <span>%</span>
                     </span>
-                    <span className={classes.sum}>${totalVatValue}</span>
+                    <span className={classes.sum}>${props.totalVatValue}</span>
                   </div>
                 </div>
                 <div className={classes["grand-total"]}>
                   <h3>Grand Total</h3>
                   <div className={classes.input}>
-                    <span>$0</span>
-                    {/* Dynamic value later here */}
+                    <span>${props.grandTotalValue}</span>
                   </div>
                 </div>
               </div>

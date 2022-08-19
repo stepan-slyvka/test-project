@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import InvoiceItemDescription from "../Invoice/InvoiceItemDescription";
 import classes from "../Invoice/InvoiceItem.module.css";
 
-const InvoiceItem = () => {
+const InvoiceItem = (props) => {
   const { invoiceId } = useParams();
 
   const invoices = useSelector((state) => state.invoice.invoices);
@@ -25,6 +25,9 @@ const InvoiceItem = () => {
       sub_total={invoice.sub_total}
       vat={invoice.vat}
       grand_total={invoice.grand_total}
+      subTotalValue={props.subTotalValue}
+      totalVatValue={props.totalVatValue}
+      grandTotalValue={props.grandTotalValue}
       items={invoice.ITEMS}
     />
   ) : (
