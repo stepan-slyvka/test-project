@@ -24,7 +24,6 @@ const invoiceSlice = createSlice({
         order_date: newItem.order_date,
         ITEMS: [...newItem.ITEMS],
       });
-      console.log(newItem);
     },
     removeInvoice(state, action) {
       const id = action.payload;
