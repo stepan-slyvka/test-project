@@ -31,26 +31,8 @@ const AddInvoiceItem = (props) => {
 
   const options = ["Pending", "Shipped", "Delivered"];
 
-  // const inputs = [{ item_name: "", unit_costs: "", unit: "" }];
-
   const [startDate, setStartDate] = useState(date);
   const [selectedOption, setSelectedOption] = useState(options[0]);
-  // const [listItems, setListItems] = useState(inputs);
-  // const [subtotalValue, setSubtotal] = useState(0);
-  // const [totalVatPercentage, setTotalVatParcentage] = useState(0);
-  // const [totalVatValue, setTotalVatValue] = useState(0);
-  // const [grandTotalValue, setGrandTotalValue] = useState(0);
-
-  // const listenTotalVat = (event) => {
-  //   const totalVat = parseInt(
-  //     (parseFloat(event.target.value) * parseFloat(subtotalValue)) / 100
-  //   );
-  //   const grandTotal = subtotalValue + totalVat;
-
-  //   setGrandTotalValue(grandTotal);
-  //   setTotalVatParcentage(parseInt(event.target.value));
-  //   setTotalVatValue(totalVat);
-  // };
 
   const optionClickHandler = (value) => () => {
     setSelectedOption(value);
@@ -105,17 +87,6 @@ const AddInvoiceItem = (props) => {
       props.listItems.concat({ item_name: "", unit_costs: "", unit: "" })
     );
   };
-
-  // const calculateTotal = () => {
-  //   let subtotal = 0;
-
-  //   listItems.map((item) => {
-  //     const itemTotal = parseFloat(item.unit_costs) * parseFloat(item.unit);
-  //     return (subtotal = subtotal + itemTotal);
-  //   });
-
-  //   setSubtotal(subtotal);
-  // };
 
   const updateItemHandler = (index, inputName, value) => {
     props.listItems[index] = { ...props.listItems[index], [inputName]: value };
